@@ -1,0 +1,130 @@
+# Project exclude paths
+/target/
+
+# Dossiers généraux
+.idea/
+target/
+out/
+
+# Fichiers de configuration
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+
+# Dossiers de build
+build/
+bin/
+lib/
+classes/
+
+# Fichiers de logs
+*.log
+
+# Fichiers spécifiques à IntelliJ IDEA
+workspace.xml
+tasks.xml
+.dic/
+.ideaVcs.xml
+
+# Dossiers et fichiers générés par IntelliJ IDEA
+production/
+*.class
+
+# Fichiers de sauvegarde
+*~
+
+# Fichiers de données locales
+.idea/workspace.xml
+
+# Dossiers de cache
+.idea/caches/
+
+# Fichiers de configuration WebStorm
+.idea/javascript.xml
+
+# Fichiers de configuration PhpStorm
+.idea/php.xml
+
+# Fichiers de configuration PyCharm
+.idea/python.xml
+.idea/python-skeletons/
+
+# Fichiers de configuration RubyMine
+.idea/ruby.xml
+
+# Fichiers de configuration CLion
+.idea/clion.xml
+.idea/cmake/
+
+# Fichiers de configuration Android Studio
+.idea/misc.xml
+.idea/vcs.xml
+.idea/codeStyles/
+
+# Fichiers de configuration DataGrip
+.idea/datagrip.xml
+
+# Fichiers de configuration GoLand
+.idea/go.xml
+
+# Fichiers de configuration Rider
+.idea/rider.xml
+
+# Fichiers de configuration IntelliJ IDEA Ultimate
+.idea/encodings.xml
+
+# Fichiers de configuration Android Studio / IntelliJ IDEA Ultimate
+.idea/dictionaries/
+
+# Fichiers de configuration d'indexation
+.idea/index/
+
+# Fichiers de configuration AppCode
+.idea/inspectionProfiles/
+
+# Fichiers de configuration RubyMine / PhpStorm / WebStorm
+.idea/shelf/
+
+# Fichiers de configuration PhpStorm / WebStorm
+.idea/inspection/
+
+# Fichiers de configuration ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Fichiers de cache ReSharper
+*.suo
+*.sln.iml
+
+# Fichiers de configuration TFS
+.vscode/
+_resharper/
+_ReSharper.*/
+
+
+# Fichiers de sauvegarde Visual Studio
+[Bb]in/
+[Oo]bj/
+debug
+release
+
+# Visual Studio
+*.ntvs_analysis
+NTVS.Common.sln.docstates
+
+# Rider
+.
+
+# User-specific files
+.idea/libraries
+
+# Private userspace
+.idea/private
+.idea/codeStyleSettings.xml
+.idea/copyright
+.idea/other.xml
+.idea/repoconfig
+
+# Flutter specific files
+flutter/

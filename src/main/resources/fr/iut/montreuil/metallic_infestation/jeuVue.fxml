@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.iut.montreuil.metallic_infestation.controleur.JeuControleur">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/gui/fond.png" />
+         </image>
+      </ImageView>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0">
+         <bottom>
+            <Pane prefHeight="50.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutY="-14.0" prefHeight="65.0" prefWidth="736.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="35.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/gui/gold.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="ArgentProperty" alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="3500" textFill="#d3cfcf">
+                                 <font>
+                                    <Font name="Metal Mania" size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/gui/Heart.png" />
+                                 </image>
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Label fx:id="PvProperty" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="100.0" text="100" textAlignment="CENTER" textFill="#d3cfcf">
+                                 <font>
+                                    <Font name="Metal Mania" size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="38.0" fitWidth="29.0">
+                                 <image>
+                                    <Image url="@img/gui/TeteVagueChauve.png" />
+                                 </image>
+                              </ImageView>
+                              <Label fx:id="vagueActuelleLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="100.0" text="1" textAlignment="CENTER" textFill="#d3cfcf">
+                                 <font>
+                                    <Font name="Metal Mania" size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </bottom>
+         <center>
+            <Pane fx:id="zoneAffichageEnnemis" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="zoneAffichageObjets">
+                     <children>
+                        <TilePane fx:id="tilePane" prefColumns="23" prefHeight="736.0" prefRows="23" prefTileHeight="32.0" prefTileWidth="32.0" prefWidth="736.0" style="-fx-background-color: grey;" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </center>
+         <right>
+            <Pane prefHeight="800.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="-14.0" prefHeight="800.0" prefWidth="264.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="267.0" text="Boutique" textAlignment="CENTER" textFill="#d3cfcf" underline="true">
+                           <font>
+                              <Font name="Metal Mania" size="43.0" />
+                           </font>
+                        </Label>
+                        <VBox alignment="CENTER" prefHeight="296.0" prefWidth="264.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="262.0" text="Achat PV" textFill="#d3cfcf">
+                                 <font>
+                                    <Font name="Metal Mania" size="25.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Button fx:id="bouton1Pv" mnemonicParsing="false" onAction="#achatUnPv" onMousePressed="#boutonPresse1" onMouseReleased="#boutonNonPresse1" prefHeight="70.0" prefWidth="190.0" style="-fx-background-color: transparent;">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <graphic>
+                                    <ImageView fx:id="im1Pv" fitHeight="65.0" fitWidth="172.0" mouseTransparent="true" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@img/gui/pv_bouton_non_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="bouton3Pv" mnemonicParsing="false" onAction="#achatTroisPv" onMousePressed="#boutonPresse2" onMouseReleased="#boutonNonPresse2" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: transparent;">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <graphic>
+                                    <ImageView fx:id="im3Pv" fitHeight="65.0" fitWidth="172.0" mouseTransparent="true" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@img/gui/pv_bouton_non_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="bouton5Pv" mnemonicParsing="false" onAction="#achatCinqPv" onMousePressed="#boutonPresse3" onMouseReleased="#boutonNonPresse3" prefHeight="50.0" prefWidth="190.0" style="-fx-background-color: transparent;">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <graphic>
+                                    <ImageView fx:id="im5Pv" fitHeight="65.0" fitWidth="172.0" mouseTransparent="true" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@img/gui/pv_bouton_non_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="495.0" prefWidth="264.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="263.0" text="Achat Tour" textFill="#d3cfcf">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Metal Mania" size="25.0" />
+                                 </font>
+                              </Label>
+                              <ToggleButton fx:id="tour1" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" selected="true" style="-fx-background-radius: 50%; -fx-background-color: transparent;">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="toursGroupe" />
+                                 </toggleGroup>
+                                 <graphic>
+                                    <ImageView fx:id="imTour1" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/gui/bouton_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </ToggleButton>
+                              <ToggleButton fx:id="tour2" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 50%; -fx-background-color: transparent;" toggleGroup="$toursGroupe">
+                                 <graphic>
+                                    <ImageView fx:id="imTour2" fitHeight="70.0" fitWidth="70.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/gui/bouton_non_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ToggleButton>
+                              <ToggleButton fx:id="tour3" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 50%; -fx-background-color: transparent;" toggleGroup="$toursGroupe">
+                                 <graphic>
+                                    <ImageView fx:id="imTour3" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@img/gui/bouton_non_pressé.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ToggleButton>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="263.0" text="Achat Obstacles" textFill="#d3cfcf">
+                                 <font>
+                                    <Font name="Metal Mania" size="25.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ToggleButton fx:id="obs1" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 50%; -fx-background-color: transparent;" toggleGroup="$toursGroupe">
+                                       <graphic>
+                                          <ImageView fx:id="imObs1" fitHeight="70.0" fitWidth="70.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/gui/bouton_non_pressé.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="obs2" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" style="-fx-background-radius: 50%; -fx-background-color: transparent;" toggleGroup="$toursGroupe">
+                                       <graphic>
+                                          <ImageView fx:id="imObs2" fitHeight="70.0" fitWidth="70.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@img/gui/bouton_non_pressé.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </ToggleButton>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </right>
+      </BorderPane>
+      <HBox alignment="CENTER" layoutX="274.0" layoutY="736.0" prefHeight="64.0" prefWidth="463.0">
+         <children>
+            <Label text="Coût de la sélection :" textFill="#d3cfcf">
+               <font>
+                  <Font name="Metal Mania" size="25.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="prixTour" alignment="CENTER" contentDisplay="CENTER" text="10" textAlignment="CENTER" textFill="#d3cfcf">
+               <font>
+                  <Font name="Metal Mania" size="25.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Pcs" textFill="#d3cfcf">
+               <font>
+                  <Font name="Metal Mania" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="901.0" layoutY="732.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/obstacles/mine.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="848.0" layoutY="453.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@img/tourelle/tourelleSemiAllumee.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="848.0" layoutY="532.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@img/tourelle/tourelleAutoAllumee.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="847.0" layoutY="605.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@img/tourelle/tourelleMissiles.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="794.0" layoutY="733.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/obstacles/spikes2.png" />
+         </image>
+      </ImageView>
+      <Text fill="#d3cfcf" layoutX="819.0" layoutY="156.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="1 PV = 100 Pcs">
+         <font>
+            <Font name="Metal Mania" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#d3cfcf" layoutX="815.0" layoutY="249.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="3 PV = 200 Pcs">
+         <font>
+            <Font name="Metal Mania" size="20.0" />
+         </font>
+      </Text>
+      <Text fill="#d3cfcf" layoutX="815.0" layoutY="342.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="5 PV = 300 Pcs">
+         <font>
+            <Font name="Metal Mania" size="20.0" />
+         </font>
+      </Text>
+
+      <Label fx:id="lancementVagueLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="737.0" prefWidth="737.0" textFill="#9a1616">
+         <font>
+            <Font name="Metal Mania" size="56.0" />
+         </font>
+      </Label>
+      <Label fx:id="gameOverLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="737.0" prefWidth="757.0" textFill="#9a1616">
+         <font>
+            <Font name="Metal Mania" size="56.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
