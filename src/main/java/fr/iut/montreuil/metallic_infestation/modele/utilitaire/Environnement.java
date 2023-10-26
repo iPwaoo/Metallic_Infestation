@@ -2,9 +2,8 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -21,25 +20,27 @@ public class Environnement {
     private final Joueur joueur;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
-    private ObservableList<Tourelle> listeTourelles;
+    //private ObservableList<Tourelle> listeTourelles;
     private ObservableList<Projectile> listeProjectiles;
-
     private ObservableList<Explosion> listExplosions;
+
+    private ObservableList<ObjetPlacable> listePlacables;
     private ArrayList<Ennemi> ennemisASpawn;
 
     private ParcoursBFS parcoursBFS;
     public int nbTours;
     private ObservableList<Laser> listeLasers;
-    private ObservableList<Obstacle> listeObstacles;
+    //private ObservableList<Obstacle> listeObstacles;
 
     public Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
-        this.listeTourelles = FXCollections.observableArrayList();
+        //this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
         this.listeLasers = FXCollections.observableArrayList();
         this.listExplosions = FXCollections.observableArrayList();
-        this.listeObstacles = FXCollections.observableArrayList();
+        //this.listeObstacles = FXCollections.observableArrayList();
+        this.listePlacables = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = new ParcoursBFS(terrain);
         this.joueur = new Joueur(100,1000);
@@ -60,9 +61,9 @@ public class Environnement {
         return listeEnnemis;
     }
 
-    public ObservableList<Tourelle> getListeTourelles() {
+    /*public ObservableList<Tourelle> getListeTourelles() {
         return listeTourelles;
-    }
+    }*/
 
     public ObservableList<Laser> getListeLasers(){
         return listeLasers;
@@ -77,31 +78,16 @@ public class Environnement {
         return null;
     }
 
-    public void ajouterDansListeTours(Tourelle t) {
-        listeTourelles.add(t);
-
-    }
-    public void ajouterDansListeObstacles(Obstacle o) {
-        listeObstacles.add(o);
+    public void ajouterDansLaListeDesPlacables (ObjetPlacable op){
+        listePlacables.add(op);
     }
 
-    public Tourelle retirerTour(Case c) {
-        Tourelle supprimee = null;
-        for (int i = this.getListeTourelles().size() - 1; i >= 0; i--) {
-            if (this.getListeTourelles().get(i).getPosition().equals(c)) {
-                supprimee = this.getListeTourelles().get(i);
-                this.getListeTourelles().remove(i);
-            }
-        }
-        return supprimee;
-    }
-
-    public Obstacle retirerObstacle(Case c) {
-        Obstacle supprimee = null;
-        for (int i = this.getListeObstacles().size() - 1; i >= 0; i--) {
-            if (this.getListeObstacles().get(i).getPosition().equals(c)) {
-                supprimee = this.getListeObstacles().get(i);
-                this.getListeObstacles().remove(i);
+    public ObjetPlacable retirerPlacable (Case c){
+        ObjetPlacable supprimee = null;
+        for (int i = this.getListePlacables().size() - 1; i >= 0; i--) {
+            if (this.getListePlacables().get(i).getEmplacement().equals(c)) {
+                supprimee = this.getListePlacables().get(i);
+                this.getListePlacables().remove(i);
             }
         }
         return supprimee;
@@ -110,6 +96,8 @@ public class Environnement {
     public ObservableList<Projectile> getListeProjectiles() {
         return listeProjectiles;
     }
+
+    public ObservableList<ObjetPlacable> getListePlacables(){return listePlacables;}
 
     public ObservableList<Explosion> getListExplosions(){return listExplosions;}
 
@@ -138,7 +126,8 @@ public class Environnement {
         }
         return supprime;
     }
-    public void unTour(GestionnaireVagues gestionnaireVagues) {
+
+    /*public void unTour(GestionnaireVagues gestionnaireVagues) {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
         if (this.joueur.pvJoueurProprerty().get() <= 0){
@@ -213,7 +202,7 @@ public class Environnement {
         }
 
         nbTours++;
-    }
+    }*/
 
     public Joueur getJoueur() {
         return this.joueur;
@@ -250,10 +239,9 @@ public class Environnement {
     }
 
 
-    public ObservableList<Obstacle> getListeObstacles() {
+    /*public ObservableList<Obstacle> getListeObstacles() {
         return this.listeObstacles;
-
-    }
+    }*/
 
     public IntegerProperty vagueActuelleProperty(){
         return this.vagueActuelleProperty;
@@ -264,6 +252,34 @@ public class Environnement {
 
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
+    }
+
+    public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
+        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<Ennemi>();
+        for (int zoneTest = 1; zoneTest <= portee; zoneTest++) {
+            for (int i = zoneTest * -1; i <= zoneTest; i++) {
+                for (int j = zoneTest * -1; j <= zoneTest; j++) {
+                    if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
+
+                        Ennemi ennemiCase = ennemiSurCase(new Case(emplacement.getI() + i, emplacement.getJ() + j));
+                        if (ennemiCase != null) {
+                            ennemisLesPlusProches.add(ennemiCase);
+                        }
+                    }
+                }
+            }
+        }
+        return ennemisLesPlusProches;
+    }
+    public Ennemi ennemiLePlusProche(Case emplacement, int portee) {
+        ArrayList<Ennemi> ennemis = ennemisLesPlusProches(emplacement, portee);
+
+
+        if (!ennemis.isEmpty()) {
+            return ennemis.get(0);
+        }
+
+        return null;
     }
 }
 

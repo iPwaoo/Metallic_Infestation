@@ -1,8 +1,7 @@
 package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileMissile;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileSemi;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 
 
 
-public abstract class Tourelle {
+public abstract class Tourelle extends ObjetPlacable {
 
    private static int compteur;
    private int id;
@@ -54,17 +53,15 @@ public abstract class Tourelle {
     public abstract void creerProjectile(ArrayList<Point> coordonee);
 
 
-    public Case getPosition(){
-        return this.position;
+    public Case getPosition() {
+        return this.getEmplacement();
     }
-
-    public int getCout (){return this.cout;}
-
-
-    public void poserTourelle(){
-        if (this.terrain.emplacementVideSurCase(this.getPosition())){
-            // On dit que la case est occupée par une tour
-            terrain.setCase(this.getPosition(),3);
+    public int getType(){
+        return 3;
+    }
+    public boolean peutSePoser(){
+        if(getTerrain().emplacementVideSurCase(getEmplacement())){
+            return true;
         }
     }
 

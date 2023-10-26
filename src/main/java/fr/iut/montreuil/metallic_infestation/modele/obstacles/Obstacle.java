@@ -1,62 +1,41 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
-public abstract class Obstacle {
+public abstract class Obstacle extends ObjetPlacable {
 
-    private Case c;
-    private Environnement environnement;
-    private Terrain terrain;
-    private int cout;
+    int pv;
 
-    public Obstacle(Case c, Environnement environnement, Terrain terrain, int cout) {
-        this.c = c;
-        this.environnement = environnement;
-        this.terrain = terrain;
-        this.cout = cout;
+    public Obstacle(Case emplacement, Environnement environnement, Terrain terrain, int cout, int pv){
+        super(emplacement, environnement,terrain, cout);
+        this.pv = pv;
     }
-    public int getCout() {
-        return cout;
-    }
-
-    public Environnement getEnvironnement() {
-        return environnement;
-    }
-
-    public void setEnvironnement(Environnement environnement) {
-        this.environnement = environnement;
-    }
-
-    public Terrain getTerrain() {
-        return terrain;
-    }
-
-    public void setTerrain(Terrain terrain) {
-        this.terrain = terrain;
-    }
-
-    public Case getPosition() {
-        return this.c;
-    }
-
-    public void poserObstacle() {
-        if (this.terrain.cheminSurCase(this.getPosition())){
-            // On dit que la case est occupée par une tour
-            terrain.setCase(this.getPosition(),4);
-        }
-    }
-
-    public boolean ennemisSurObstacle() {
-        for (Ennemi e : environnement.getListeEnnemis()){
-            if (e.getCase().equals(this.getPosition())){
-                return true;
-            }
+    @Override
+    public boolean peutSePoser() {
+        if (this.getTerrain().cheminSurCase(this.getEmplacement())){
+            return true;
         }
         return false;
     }
 
+    @Override
+    public int getType() {
+        return 4;
+    }
 
+
+    public  void agir() {
+        //TODO A besoin des effets
+    }
+
+    public void decrementerPV(int pvPerdu){
+        this.pv -= pvPerdu;
+        if(pv <= 0){
+            getEnvironnement().retirerPlacable(getEmplacement());
+        }
+    }
 }
