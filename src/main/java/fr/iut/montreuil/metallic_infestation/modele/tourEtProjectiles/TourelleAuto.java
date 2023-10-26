@@ -1,31 +1,22 @@
 package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
 
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Laser;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
+import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiDifficile;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.*;
+
+import java.util.ArrayList;
 
 public class TourelleAuto extends Tourelle {
-    public TourelleAuto(Case position, Environnement env, Terrain terrain) {
-        super(5,position,30,3,env,terrain, 0);
+    public TourelleAuto(Environnement env,Case position, StratVise strategie, Terrain terrain) {
+        super(30, 3, env, 2, position, strategie, terrain);
     }
+
+    //count 30 portee 3
 
 
     @Override
-    public void infligerDegats() {
-        if(getEnnemiVise() != null) {
-            getEnnemiVise().decrementerPv(getDegats());
-            System.out.println(getEnnemiVise().getPv());
-
-        }
+    public void creerProjectile(ArrayList<Point> coordonee) {
+        //TODO appele de la methode pour les lazers
     }
 
-    public Laser creerLaser() {
-        if (!env.destEstPresent(getEnnemiVise())){
-            return new Laser(this, getEnnemiVise());
-        }
-        return null;
-    }
 }

@@ -25,7 +25,9 @@ public class ProjectileMissile extends Projectile {
         this.coordonnees.setY(this.coordonnees.getY() + deltaYModifie);
     }
     public Explosion creerExplosion () {
-        return new Explosion(this.getTourelle().env, this.getEnnemiVise().getCoordonnees(), getTourelle().getDegats(), getTourelle().getPorteeMissile());
+        //todo a faire
+//        return new Explosion(this.getTourelle().env, this.getEnnemiVise().getCoordonnees(), getTourelle().getDegats(), getTourelle().getPorteeMissile());
+        return null;
     }
     public DoubleProperty AngleProperty(){return angleProperty;}
 }

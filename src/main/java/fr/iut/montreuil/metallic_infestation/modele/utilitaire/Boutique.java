@@ -3,10 +3,7 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleAuto;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleMissiles;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.TourelleSemi;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 
 public class Boutique {
    private Joueur joueur;
@@ -37,21 +34,21 @@ public class Boutique {
      */
     public void achatTour(int typeTour, Case c){
         if (typeTour == 1){
-            Tourelle tourelle1 = new TourelleSemi(c, environnement, terrain);
+            Tourelle tourelle1 = new TourelleSemi(environnement,c,new ViseUnSeul(),terrain);
             if(joueur.achatPossible(tourelle1.getCout())) {
                 environnement.ajouterDansListeTours(tourelle1);
                 joueur.debiterArgentProperty(tourelle1.getCout());
             }
         }
         else if (typeTour == 2) {
-            Tourelle tourelle2 = new TourelleAuto(c, environnement, terrain);
+            Tourelle tourelle2 = new TourelleAuto(environnement,c,new ViseUnSeul(),terrain);
             if(joueur.achatPossible(tourelle2.getCout())) {
                 environnement.ajouterDansListeTours(tourelle2);
                 joueur.debiterArgentProperty(tourelle2.getCout());
             }
         }
         else {
-            Tourelle tourelle3 = new TourelleMissiles(c, environnement, terrain);
+            Tourelle tourelle3 = new TourelleMissiles(environnement,c,new ViseUnSeul(),terrain);
             if(joueur.achatPossible(tourelle3.getCout())) {
                 environnement.ajouterDansListeTours(tourelle3);
                 joueur.debiterArgentProperty(tourelle3.getCout());

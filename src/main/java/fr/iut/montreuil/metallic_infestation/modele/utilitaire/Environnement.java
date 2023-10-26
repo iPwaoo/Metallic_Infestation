@@ -167,53 +167,12 @@ public class Environnement {
                 }
             }
         }
-        ArrayList<Projectile> listeProjectilesASupp = new ArrayList<>();
-        if (this.nbTours % 2 == 0) {
-            for (Projectile p : this.getListeProjectiles()) {
-                p.seDeplacer();
-                if (p.arriveSurEnnemi()) {
-                    if (p instanceof ProjectileMissile){
-                        listExplosions.add(((ProjectileMissile) p).creerExplosion());
-                    }
-                    p.getTourelle().infligerDegats();
-                    listeProjectilesASupp.add(p);
-                }
-            }
+        //todo faire l'appelle pour deplacer les projectiles et qu'ils infligent des degats
 
-        }
-        if (this.nbTours % 20 == 0) {
-            for (Tourelle t : this.getListeTourelles()) {
-                if (t instanceof TourelleSemi) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectile();
-                        this.ajouterProjectile(p);
-                    }
-                }
-            }
+        for (Tourelle t: listeTourelles) {
+            t.agir();
         }
 
-        if (this.nbTours % 100 == 0){
-            for (Tourelle t: this.getListeTourelles()){
-                if (t instanceof TourelleMissiles) {
-                    t.raffraichirEnnemiVise();
-                    if (t.getEnnemiVise() != null) {
-                        Projectile p = t.creerProjectileMissile();
-                        this.ajouterProjectile(p);
-                    }
-                }
-            }
-        }
-        for (Tourelle t : this.getListeTourelles()) {
-            if (t instanceof TourelleAuto) {
-                t.raffraichirEnnemiVise();
-                if (t.getEnnemiVise() != null) {
-                    Laser l = ((TourelleAuto) t).creerLaser();
-                    this.ajouterLaser(l);
-                    t.infligerDegats();
-                }
-            }
-        }
         if (!listeObstacles.isEmpty()) {
             for (int i = listeObstacles.size() - 1; i >= 0; i--) {
                 for (Ennemi e : listeEnnemis) {
@@ -240,9 +199,6 @@ public class Environnement {
             if (l.getEnnemiVise() == null){
                 listeLasers.clear();
             }
-        }
-        for (Projectile p : listeProjectilesASupp) {
-            this.retirerProjectile(p);
         }
         for (Ennemi e : ennemisASupp){
             this.retirerEnnemi(e);

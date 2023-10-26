@@ -3,17 +3,20 @@ package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
+import java.util.ArrayList;
+
 public class TourelleSemi extends Tourelle {
-    public TourelleSemi(Case position, Environnement env, Terrain terrain){
-        super(20,position,10,5,env,terrain,0);
+    public TourelleSemi(Environnement env, Case position, StratVise strategie, Terrain terrain) {
+        super(10, 5, env, 20, position, strategie, terrain);
     }
 
+    //count 10 porte 5
+
     @Override
-    public void infligerDegats() {
-        if(getEnnemiVise() != null) {
-            getEnnemiVise().decrementerPv(getDegats());
-        }
+    public void creerProjectile(ArrayList<Point> coordonee) {
+        //todo mettre la methode pour creer des balles
     }
 }
