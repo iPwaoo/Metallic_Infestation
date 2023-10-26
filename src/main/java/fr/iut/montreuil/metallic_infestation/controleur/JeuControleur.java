@@ -2,6 +2,7 @@ package fr.iut.montreuil.metallic_infestation.controleur;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Laser;
@@ -58,7 +59,7 @@ public class JeuControleur implements Initializable {
     private Environnement env;
     private Joueur joueur;
     private BoutiqueVue boutiqueVue;
-    private ObstacleVue obstacleVue;
+    private ObjetPlacableVue placableVue;
 
     @FXML
     private ToggleGroup toursGroupe;
@@ -118,9 +119,7 @@ public class JeuControleur implements Initializable {
         this.terrain = new Terrain();
         TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
         this.env = new Environnement(terrain);
-        TourelleVue tourelleVue = new TourelleVue(env,zoneAffichageObjets);
-        this.obstacleVue = new ObstacleVue(env,zoneAffichageObjets);
-
+        this.placableVue = new ObjetPlacableVue(env, zoneAffichageObjets);
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
@@ -155,7 +154,7 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
-        env.getListeTourelles().addListener((ListChangeListener<Tourelle>) change -> {
+       /* env.getListeTourelles().addListener((ListChangeListener<Tourelle>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
                     for (Tourelle removedTourelle : change.getRemoved()) {
@@ -168,8 +167,26 @@ public class JeuControleur implements Initializable {
                     }
                 }
             }
+        });*/
+        env.getListePlacables().addListener((ListChangeListener<ObjetPlacable>) change -> {
+            while (change.next()) {
+                if (change.wasRemoved()) {
+                    for (ObjetPlacable removedPlacable : change.getRemoved()) {
+                        if (removedPlacable instanceof Tourelle){
+
+                        }
+                        placableVue.retirerPlacable(removedPlacable);
+                    }
+                }
+                if (change.wasAdded()) {
+                    for (ObjetPlacable addedPlacable : change.getAddedSubList()) {
+                        placableVue.poserPlacable(addedPlacable);
+                    }
+                }
+            }
         });
-        env.getListeObstacles().addListener((ListChangeListener<Obstacle>) change -> {
+
+        /*env.getListeObstacles().addListener((ListChangeListener<Obstacle>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
                     for (Obstacle removedObstacle : change.getRemoved()) {
@@ -182,7 +199,7 @@ public class JeuControleur implements Initializable {
                     }
                 }
             }
-        });
+        });*/
         env.getListeProjectiles().addListener((ListChangeListener<Projectile>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
@@ -303,6 +320,7 @@ public class JeuControleur implements Initializable {
                     boutique.venteTour(c);
                 } else if (this.terrain.obstacleSurCase(c)){
                     boutique.venteObstacle(c);
+                }else {
                 }
 
             }
@@ -326,16 +344,16 @@ public class JeuControleur implements Initializable {
                         gameLoop.stop();
                     } else {
 
-                        env.unTour(gestionnaireVagues);
-                        for (Obstacle o : this.env.getListeObstacles()){
+                        //env.unTour(gestionnaireVagues);
+                        /*for (ObjetPlacable o : this.env.getListePlacables()){
                             if (o instanceof Pics) {
-                                if (o.ennemisSurObstacle()) {
-                                    obstacleVue.actionnerPics(o);
+                                if () {
+                                    placableVue.actionnerPics((Obstacle) o);
                                 } else {
-                                    obstacleVue.desactiverPics(o);
+                                    placableVue.actionnerPics((Obstacle) o);
                                 }
                             }
-                        }
+                        }*/
                         if (joueur.pvJoueurProprerty().get() <= 0){
                             gameOverLabel.setVisible(true);
                             gameLoop.stop();

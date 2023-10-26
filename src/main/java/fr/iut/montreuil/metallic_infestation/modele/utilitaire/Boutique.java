@@ -39,21 +39,21 @@ public class Boutique {
         if (typeTour == 1){
             Tourelle tourelle1 = new TourelleSemi(c, environnement, terrain);
             if(joueur.achatPossible(tourelle1.getCout())) {
-                environnement.ajouterDansListeTours(tourelle1);
+                environnement.ajouterDansLaListeDesPlacables(tourelle1);
                 joueur.debiterArgentProperty(tourelle1.getCout());
             }
         }
         else if (typeTour == 2) {
             Tourelle tourelle2 = new TourelleAuto(c, environnement, terrain);
             if(joueur.achatPossible(tourelle2.getCout())) {
-                environnement.ajouterDansListeTours(tourelle2);
+                environnement.ajouterDansLaListeDesPlacables(tourelle2);
                 joueur.debiterArgentProperty(tourelle2.getCout());
             }
         }
         else {
             Tourelle tourelle3 = new TourelleMissiles(c, environnement, terrain);
             if(joueur.achatPossible(tourelle3.getCout())) {
-                environnement.ajouterDansListeTours(tourelle3);
+                environnement.ajouterDansLaListeDesPlacables(tourelle3);
                 joueur.debiterArgentProperty(tourelle3.getCout());
             }
         }
@@ -62,13 +62,13 @@ public class Boutique {
         if (typeObstacle == 1){
             Obstacle piques = new Pics(c,environnement,terrain);
             if(joueur.achatPossible(piques.getCout())){
-                environnement.ajouterDansListeObstacles(piques);
+                environnement.ajouterDansLaListeDesPlacables(piques);
                 joueur.debiterArgentProperty(piques.getCout());
             }
         } else if (typeObstacle == 2){
             Mine mine = new Mine(c,environnement,terrain);
             if(joueur.achatPossible(mine.getCout())){
-                environnement.ajouterDansListeObstacles(mine);
+                environnement.ajouterDansLaListeDesPlacables(mine);
                 joueur.debiterArgentProperty(mine.getCout());
             }
         }
@@ -76,7 +76,7 @@ public class Boutique {
 
     public void venteTour(Case c) {
         if (terrain.tourSurCase(c)){
-            joueur.crediterArgentProperty(environnement.retirerTour(c).getCout()/2);
+            joueur.crediterArgentProperty(environnement.retirerPlacable(c).getCout()/2);
             terrain.setCase(c, 2);
 
         }
@@ -84,7 +84,7 @@ public class Boutique {
 
     public void venteObstacle(Case c) {
         if (terrain.obstacleSurCase(c)){
-            joueur.crediterArgentProperty(environnement.retirerObstacle(c).getCout()/2);
+            joueur.crediterArgentProperty(environnement.retirerPlacable(c).getCout()/2);
             terrain.setCase(c, 1);
             System.out.println(terrain.getTerrain()[c.getI()][c.getJ()]);
         }
