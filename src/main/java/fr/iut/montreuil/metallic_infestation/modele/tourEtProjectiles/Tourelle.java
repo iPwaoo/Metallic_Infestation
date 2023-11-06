@@ -26,6 +26,7 @@ public abstract class Tourelle extends ObjetPlacable {
    private Terrain terrain;
 
     public Tourelle(int cout, int portee, Environnement env, int rechargement, Case position, StratVise strategie, Terrain terrain) {
+        super(position, env, terrain, cout);
         this.compteur++;
         this.id = compteur;
         this.cout = cout;
@@ -63,6 +64,7 @@ public abstract class Tourelle extends ObjetPlacable {
         if(getTerrain().emplacementVideSurCase(getEmplacement())){
             return true;
         }
+        return false;
     }
 
 
