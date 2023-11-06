@@ -46,11 +46,4 @@ public abstract class   ObjetPlacable {
         return terrain;
     }
 
-    public Ennemi getEnnemiVisee(){
-        return ennemiVisee;
-    }
-
-    public void setEnnemiVisee(Ennemi e){
-        ennemiVisee = e;
-    }
 }
