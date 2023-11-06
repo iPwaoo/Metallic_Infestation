@@ -35,7 +35,7 @@ public abstract class Obstacle extends ObjetPlacable {
     public void decrementerPV(int pvPerdu){
         this.pv -= pvPerdu;
         if(pv <= 0){
-            getEnvironnement().retirerPlacable(getEmplacement());
+            environnement.retirerPlacable(getEmplacement());
         }
     }
 }

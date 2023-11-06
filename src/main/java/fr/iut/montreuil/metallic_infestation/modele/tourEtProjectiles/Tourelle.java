@@ -16,33 +16,27 @@ public abstract class Tourelle extends ObjetPlacable {
 
    private static int compteur;
    private int id;
-   private int cout;
    private int portee;
-   protected Environnement env;
+   //protected Environnement env;
    private int durerDeVie;
    private int rechargement;
    private Case position;
    private StratVise strategie;
-   private Terrain terrain;
-
     public Tourelle(int cout, int portee, Environnement env, int rechargement, Case position, StratVise strategie, Terrain terrain) {
         super(position, env, terrain, cout);
         this.compteur++;
         this.id = compteur;
-        this.cout = cout;
         this.portee = portee;
-        this.env = env;
         this.durerDeVie = 0;
         this.rechargement = rechargement;
         this.position = position;
         this.strategie = strategie;
-        this.terrain = terrain;
     }
 
     public void agir()
     {
         if(durerDeVie % rechargement == 0){
-            ArrayList<Point> coordonnesVise = strategie.chercherEnnemie(env,position,portee);
+            ArrayList<Point> coordonnesVise = strategie.chercherEnnemie(environnement,position,portee);
             if (!coordonnesVise.isEmpty())
                 for (Point p : coordonnesVise) {
                     creerProjectile(coordonnesVise);

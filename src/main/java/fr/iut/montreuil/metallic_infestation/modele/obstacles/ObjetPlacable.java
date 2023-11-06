@@ -7,7 +7,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 public abstract class   ObjetPlacable {
     private Case emplacement;
-    private Environnement environnement;
+    protected Environnement environnement;
     private Terrain terrain;
     private int cout;
 
@@ -52,9 +52,5 @@ public abstract class   ObjetPlacable {
 
     public void setEnnemiVisee(Ennemi e){
         ennemiVisee = e;
-    }
-
-    public Environnement getEnvironnement() {
-        return environnement;
     }
 }
