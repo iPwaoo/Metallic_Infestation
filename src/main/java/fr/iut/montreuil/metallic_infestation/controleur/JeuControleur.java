@@ -116,9 +116,9 @@ public class JeuControleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         initAnimation();
-        this.terrain = new Terrain();
+        this.terrain = Terrain.getInstance();
         TerrainVue terrainVue = new TerrainVue(terrain, tilePane);
-        this.env = new Environnement(terrain);
+        this.env = Environnement.getInstance();
         this.placableVue = new ObjetPlacableVue(env, zoneAffichageObjets);
 
         ProjectileSemiVue projectileSemiVue = new ProjectileSemiVue(env,zoneAffichageEnnemis);
@@ -132,7 +132,7 @@ public class JeuControleur implements Initializable {
 
         this.joueur = env.getJoueur();
 
-        Boutique boutique = new Boutique(joueur, env, terrain);
+        Boutique boutique = Boutique.getInstance();
         this.boutiqueVue = new BoutiqueVue(boutique, toursGroupe, tour1,tour2,tour3, obs1, obs2, prixTour, tilePane, terrain);
         this.laserVue = new LaserVue(env, zoneAffichageEnnemis);
         joueur.argentProperty().addListener((obs, old, nouv) -> this.ArgentProperty.setText(nouv.toString()));

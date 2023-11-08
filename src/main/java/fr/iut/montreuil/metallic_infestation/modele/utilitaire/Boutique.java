@@ -6,20 +6,24 @@ import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 
 public class Boutique {
-   private Joueur joueur;
-   private Environnement environnement;
+    private static Boutique uniqueInstance = null;
 
-   private Terrain terrain;
+    private Joueur joueur;
+    private Environnement environnement;
+    private Terrain terrain;
 
-
-
-
-
-    public Boutique (Joueur joueur, Environnement environnement, Terrain terrain){
+    private Boutique (Joueur joueur, Environnement environnement, Terrain terrain){
         this.environnement = environnement;
         this.joueur = joueur;
         this.terrain = terrain;
     }
+
+    public static Boutique getInstance(){
+        if (uniqueInstance == null)
+            uniqueInstance = new Boutique(Joueur.getInstance(),Environnement.getInstance(),Terrain.getInstance());
+        return uniqueInstance;
+    }
+
 
     public void AchatPv (int montant, int pv) {
         if (joueur.achatPossible(montant)){
