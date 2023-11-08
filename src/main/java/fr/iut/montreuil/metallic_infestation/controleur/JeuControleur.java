@@ -42,7 +42,6 @@ public class JeuControleur implements Initializable {
     @FXML
     private Pane zoneAffichageObjets;
     private Timeline gameLoop;
-    private int temps;
     @FXML
     private Label ArgentProperty;
     @FXML
@@ -102,12 +101,8 @@ public class JeuControleur implements Initializable {
     @FXML
     private ImageView im5Pv;
     private EnnemisVue ennemisVue;
-    private int vagueActuelle;
     private Terrain terrain;
-
     private GestionnaireVagues gestionnaireVagues;
-
-    private boolean vagueTerminee = true;
     private LaserVue laserVue;
     @FXML
     private Label gameOverLabel;
@@ -125,8 +120,6 @@ public class JeuControleur implements Initializable {
         ProjectileMissileVue projectileMissileVue = new ProjectileMissileVue(env, zoneAffichageEnnemis);
         ExplosionVue explostionVue = new ExplosionVue(env, zoneAffichageEnnemis);
         VagueVue vagueVue = new VagueVue(lancementVagueLabel);
-
-
 
         this.ennemisVue = new EnnemisVue(env, zoneAffichageEnnemis);
 
@@ -154,20 +147,6 @@ public class JeuControleur implements Initializable {
                 }
             }
         });
-       /* env.getListeTourelles().addListener((ListChangeListener<Tourelle>) change -> {
-            while (change.next()) {
-                if (change.wasRemoved()) {
-                    for (Tourelle removedTourelle : change.getRemoved()) {
-                        tourelleVue.retirerTour(removedTourelle);
-                    }
-                }
-                if (change.wasAdded()) {
-                    for (Tourelle addedTourelle : change.getAddedSubList()) {
-                        tourelleVue.poserTour(addedTourelle);
-                    }
-                }
-            }
-        });*/
         env.getListePlacables().addListener((ListChangeListener<ObjetPlacable>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
@@ -186,20 +165,6 @@ public class JeuControleur implements Initializable {
             }
         });
 
-        /*env.getListeObstacles().addListener((ListChangeListener<Obstacle>) change -> {
-            while (change.next()) {
-                if (change.wasRemoved()) {
-                    for (Obstacle removedObstacle : change.getRemoved()) {
-                        obstacleVue.retirerObstacle(removedObstacle);
-                    }
-                }
-                if (change.wasAdded()){
-                    for (Obstacle addedObstacle : change.getAddedSubList()) {
-                        obstacleVue.poserObstacle(addedObstacle);
-                    }
-                }
-            }
-        });*/
         env.getListeProjectiles().addListener((ListChangeListener<Projectile>) change -> {
             while (change.next()) {
                 if (change.wasRemoved()) {
@@ -250,8 +215,7 @@ public class JeuControleur implements Initializable {
         });
 
         terrainVue.afficherTerrain();
-        ParcoursBFS parcoursBFS = new ParcoursBFS(terrain);
-
+        ParcoursBFS parcoursBFS = ParcoursBFS.getInstance();
         parcoursBFS.remplirGrilleBFS();
         gameLoop.play();
 
@@ -320,20 +284,13 @@ public class JeuControleur implements Initializable {
                     boutique.venteTour(c);
                 } else if (this.terrain.obstacleSurCase(c)){
                     boutique.venteObstacle(c);
-                }else {
                 }
-
             }
-
         });
-
-
     }
-
 
     private void initAnimation() {
         gameLoop = new Timeline();
-        temps = 0;
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
@@ -343,24 +300,12 @@ public class JeuControleur implements Initializable {
                         System.out.println("Fini");
                         gameLoop.stop();
                     } else {
-
-                        //env.unTour(gestionnaireVagues);
-                        /*for (ObjetPlacable o : this.env.getListePlacables()){
-                            if (o instanceof Pics) {
-                                if () {
-                                    placableVue.actionnerPics((Obstacle) o);
-                                } else {
-                                    placableVue.actionnerPics((Obstacle) o);
-                                }
-                            }
-                        }*/
+                        env.unTour(gestionnaireVagues);
                         if (joueur.pvJoueurProprerty().get() <= 0){
                             gameOverLabel.setVisible(true);
                             gameLoop.stop();
                         }
-
                     }
-
                 }
         );
         gameLoop.getKeyFrames().add(kf);
