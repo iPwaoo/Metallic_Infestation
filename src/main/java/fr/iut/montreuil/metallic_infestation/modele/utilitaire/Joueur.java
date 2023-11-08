@@ -6,10 +6,17 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Joueur {
     private IntegerProperty pvJoueurProperty;
     private IntegerProperty argentProperty;
+    private static Joueur uniqueInstance = null;
 
-    public Joueur (int pvJoueur, int argent) {
-        this.pvJoueurProperty = new SimpleIntegerProperty(pvJoueur);
-        this.argentProperty =new SimpleIntegerProperty(argent);
+    private Joueur () {
+        this.pvJoueurProperty = new SimpleIntegerProperty(100);
+        this.argentProperty =new SimpleIntegerProperty(1000);
+    }
+
+    public static Joueur getInstance(){
+        if (uniqueInstance == null)
+            uniqueInstance = new Joueur();
+        return uniqueInstance;
     }
 
 
