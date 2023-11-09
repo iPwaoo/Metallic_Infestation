@@ -4,6 +4,6 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 
 public class SimpleProjectileT1 extends SimpleProjectile{
     public SimpleProjectileT1(Point position, Point cible){
-        super(position, cible,20,5,1,10);
+        super(position, cible,20,10,1,10);
     }
 }
