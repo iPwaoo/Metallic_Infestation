@@ -28,12 +28,17 @@ public abstract class Projectile extends ElementDeplacable {
         this.angleProperty = new SimpleDoubleProperty(Math.toDegrees(Math.atan2(this.cible.getY() - this.getCoordonnees().getY(), this.cible.getX() - this.getCoordonnees().getX())));
     }
 
+    public void unTour(ArrayList<Ennemi> ennemis){
+            seDeplace();
+            agit(ennemis);
+    }
+
     public void seDeplace() {
         this.comportement.seDeplacer();
     }
 
     public void agit(ArrayList<Ennemi> ennemis) {
-        if (aTouche(ennemis)) {
+        if (aTouche(ennemis)||estSurCible()) {
             this.effet.action(ennemis);
             durabilite--;
         }

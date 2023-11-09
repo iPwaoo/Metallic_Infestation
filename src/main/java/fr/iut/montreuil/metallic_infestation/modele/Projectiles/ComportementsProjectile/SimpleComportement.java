@@ -11,7 +11,9 @@ public class SimpleComportement extends ComportementProjectile{
 
     public void seDeplacer() {
         avance(this.getProjectile().getCible());
-        if(this.getProjectile().estSurCible())
+        if(this.getProjectile().estSurCible()){
             this.getProjectile().decrementeDurabilite();
+        }
+
     }
 }
