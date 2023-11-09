@@ -17,4 +17,17 @@ public abstract class EffetProjectile {
     }
 
     public abstract void action(ArrayList<Ennemi> ennemis);
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public int getRayon() {
+        return rayon;
+    }
+
+    public int getDegats() {
+        return degats;
+    }
 }
+
