@@ -22,6 +22,10 @@ public abstract class ElementDeplacable {
         return this.coordonnees;
     }
 
+    public void setCoordonnees(Point coordonnees) {
+        this.coordonnees = coordonnees;
+    }
+
     public int getVitesse(){
         return this.vitesse;
     }
