@@ -13,14 +13,10 @@ import java.util.ArrayList;
 
 public class Environnement {
     private static Environnement uniqueInstance = null;
-
-    final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
-    final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
     public static IntegerProperty vagueActuelleProperty;
     private final Joueur joueur;
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
-    //private ObservableList<Tourelle> listeTourelles;
     private ObservableList<Projectile> listeProjectiles;
     private ObservableList<Explosion> listExplosions;
 
@@ -30,8 +26,6 @@ public class Environnement {
     private ParcoursBFS parcoursBFS;
     public int nbTours;
     private ObservableList<Laser> listeLasers;
-    //private ObservableList<Obstacle> listeObstacles;
-
     private Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
