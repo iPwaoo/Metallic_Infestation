@@ -3,7 +3,6 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 
 
 public class Environnement {
+    private static Environnement uniqueInstance = null;
 
     final static int NOMBRE_VAGUES_POUR_ENNEMI_DIFFICILE = 3;
     final static int NOMBRE_ENNEMIS_DIFFICILES_SUPPLEMENTAIRES = 5;
@@ -32,7 +32,7 @@ public class Environnement {
     private ObservableList<Laser> listeLasers;
     //private ObservableList<Obstacle> listeObstacles;
 
-    public Environnement(Terrain terrain) {
+    private Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         //this.listeTourelles = FXCollections.observableArrayList();
@@ -42,17 +42,18 @@ public class Environnement {
         //this.listeObstacles = FXCollections.observableArrayList();
         this.listePlacables = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
-        this.parcoursBFS = new ParcoursBFS(terrain);
-        this.joueur = new Joueur(100,1000);
+        this.parcoursBFS = ParcoursBFS.getInstance();
+        this.joueur = Joueur.getInstance();
         vagueActuelleProperty = new SimpleIntegerProperty(0);
         nbTours = 1;
     }
 
-    /**
-     * public unTour(){
-     * if(nbTours%vitesse==0)
-     * }
-     */
+    public static Environnement getInstance(){
+        if (uniqueInstance == null)
+            uniqueInstance = new Environnement(Terrain.getInstance());
+        return uniqueInstance;
+    }
+
     public ParcoursBFS getParcoursBFS(){
         return parcoursBFS;
     }
@@ -60,10 +61,6 @@ public class Environnement {
     public ObservableList<Ennemi> getListeEnnemis() {
         return listeEnnemis;
     }
-
-    /*public ObservableList<Tourelle> getListeTourelles() {
-        return listeTourelles;
-    }*/
 
     public ObservableList<Laser> getListeLasers(){
         return listeLasers;
@@ -130,9 +127,7 @@ public class Environnement {
     public void unTour(GestionnaireVagues gestionnaireVagues) {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
-        if (this.joueur.pvJoueurProprerty().get() <= 0) {
-
-
+        if (this.joueur.pvJoueurProprerty().get() <= 0){
         }
         if (this.nbTours % 700 == 0 || nbTours == 100) {
             ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
@@ -156,43 +151,42 @@ public class Environnement {
                 }
             }
         }
-
         //todo faire l'appelle pour deplacer les projectiles et qu'ils infligent des degats
 
-        /*for (Tourelle t: listeTourelles) {
-            t.agir();
-        }
-
-        if (!listeObstacles.isEmpty()) {
-            for (int i = listeObstacles.size() - 1; i >= 0; i--) {
-                for (Ennemi e : listeEnnemis) {
-                    if (listeObstacles.get(i).ennemisSurObstacle()) {
-                        if (listeObstacles.get(i) instanceof Pics) {
-                            if (listeObstacles.get(i).ennemisSurObstacle()) {
-                                ((Pics) listeObstacles.get(i)).actionnerPics(e);
-                            }
-                        } else if (listeObstacles.get(i) instanceof Mine) {
-                            terrain.setCase(listeObstacles.get(i).getPosition(), 1);
-                            Explosion explosion = new Explosion(this,listeObstacles.get(i).getPosition().getCentreCase(), ((Mine) listeObstacles.get(i)).getDegats(),((Mine) listeObstacles.get(i)).getPorteeExplosion());
-                            listExplosions.add(explosion);
-                            explosion.infligerDegats();
-                            this.listeObstacles.remove(listeObstacles.get(i));
-                            break;
-                        }
-                    }
-
-                }
-            }
-
-        }
+//        for (Tourelle t: listeTourelles) {
+//            t.agir();
+//        }
+//
+//        if (!listeObstacles.isEmpty()) {
+//            for (int i = listeObstacles.size() - 1; i >= 0; i--) {
+//                for (Ennemi e : listeEnnemis) {
+//                    if (listeObstacles.get(i).ennemisSurObstacle()) {
+//                        if (listeObstacles.get(i) instanceof Pics) {
+//                            if (listeObstacles.get(i).ennemisSurObstacle()) {
+//                                ((Pics) listeObstacles.get(i)).actionnerPics(e);
+//                            }
+//                        } else if (listeObstacles.get(i) instanceof Mine) {
+//                            terrain.setCase(listeObstacles.get(i).getPosition(), 1);
+//                            Explosion explosion = new Explosion(this,listeObstacles.get(i).getPosition().getCentreCase(), ((Mine) listeObstacles.get(i)).getDegats(),((Mine) listeObstacles.get(i)).getPorteeExplosion());
+//                            listExplosions.add(explosion);
+//                            explosion.infligerDegats();
+//                            this.listeObstacles.remove(listeObstacles.get(i));
+//                            break;
+//                        }
+//                    }
+//
+//                }
+//            }
+//
+//        }
         for (Laser l : listeLasers){
             if (l.getEnnemiVise() == null){
                 listeLasers.clear();
             }
-        }*/
+        }
         for (Ennemi e : ennemisASupp){
             this.retirerEnnemi(e);
-        }/*
+        }
         if(nbTours % 2 == 0) {
             listeLasers.clear();
         }
@@ -200,11 +194,10 @@ public class Environnement {
             if (e.estSurChemin()){
                 e.retablirVitesse();
             }
-        }*/
+        }
 
         nbTours++;
     }
-
 
     public Joueur getJoueur() {
         return this.joueur;
@@ -240,11 +233,6 @@ public class Environnement {
         }
     }
 
-
-    /*public ObservableList<Obstacle> getListeObstacles() {
-        return this.listeObstacles;
-    }*/
-
     public IntegerProperty vagueActuelleProperty(){
         return this.vagueActuelleProperty;
     }
@@ -275,12 +263,9 @@ public class Environnement {
     }
     public Ennemi ennemiLePlusProche(Case emplacement, int portee) {
         ArrayList<Ennemi> ennemis = ennemisLesPlusProches(emplacement, portee);
-
-
         if (!ennemis.isEmpty()) {
             return ennemis.get(0);
         }
-
         return null;
     }
 }

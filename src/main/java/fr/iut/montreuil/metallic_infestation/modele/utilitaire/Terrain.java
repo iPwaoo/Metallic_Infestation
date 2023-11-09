@@ -6,7 +6,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.LiaisonEntreLeMen
 import java.util.ArrayList;
 
 public class Terrain {
-
+    private static Terrain uniqueInstance = null;
     /**
      * Pour le terrain :  0 = Case vide (Interdite)
      *                    1 = Chemin vide
@@ -24,7 +24,7 @@ public class Terrain {
 
     private ArrayList<Case> listeCasesDepartsPossibles;
 
-    public Terrain() {
+    private Terrain() {
         if (LiaisonEntreLeMenuEtLeJeu.nbTerrain == 1) {
             this.terrain = LecteurFichierTerrain.litFichier("src/main/resources/fr/iut/montreuil/metallic_infestation/Terrains/terrain1.txt", 23);
         }
@@ -36,10 +36,12 @@ public class Terrain {
         }
     }
 
-    public Terrain(int [][] terrainGrille) {
-       terrainGrille = new int[5][5];
+    public static Terrain getInstance(){
+        if (uniqueInstance == null){
+            uniqueInstance = new Terrain();
+        }
+        return uniqueInstance;
     }
-
 
     /**
      * Retourne le terrain
