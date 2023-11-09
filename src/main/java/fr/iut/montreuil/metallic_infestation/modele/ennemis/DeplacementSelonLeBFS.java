@@ -7,7 +7,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 public class DeplacementSelonLeBFS implements StrategieDeplacement {
     ParcoursBFS parcoursBFS;
     public DeplacementSelonLeBFS(Terrain terrain){
-        parcoursBFS = new ParcoursBFS(terrain);
+        parcoursBFS = ParcoursBFS.getInstance();
         parcoursBFS.remplirGrilleBFS();
     }
 
