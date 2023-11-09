@@ -5,6 +5,7 @@ import fr.iut.montreuil.metallic_infestation.modele.Projectiles.EffetsProjectile
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.ElementDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Distance;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -41,14 +42,16 @@ public abstract class Projectile extends ElementDeplacable {
 
     public boolean aTouche(ArrayList<Ennemi> ennemis) {
         for (Ennemi e : ennemis) {
-            if (Math.sqrt(Math.pow(e.getCoordonnees().getX() - this.coordonnees.getX(), 2) + Math.pow(e.getCoordonnees().getY() - this.coordonnees.getY(), 2)) <= rayon)
+            double distance = Distance.calculeDistanceXY(e.getCoordonnees(),coordonnees);
+            if (distance <= rayon)
                 return true;
         }
         return false;
     }
 
     public boolean estSurCible() {
-        if (Math.sqrt(Math.pow(cible.getX() - this.coordonnees.getX(), 2) + Math.pow(cible.getY() - this.coordonnees.getY(), 2)) <= rayon)
+        double distance = Distance.calculeDistanceXY(cible,coordonnees);
+        if (distance <= rayon)
             return true;
         else
             return false;
