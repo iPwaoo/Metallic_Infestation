@@ -127,10 +127,10 @@ public class Environnement {
         return supprime;
     }
 
-    /*public void unTour(GestionnaireVagues gestionnaireVagues) {
+    public void unTour(GestionnaireVagues gestionnaireVagues) {
 
         ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
-        if (this.joueur.pvJoueurProprerty().get() <= 0){
+        if (this.joueur.pvJoueurProprerty().get() <= 0) {
 
 
         }
@@ -156,9 +156,10 @@ public class Environnement {
                 }
             }
         }
+
         //todo faire l'appelle pour deplacer les projectiles et qu'ils infligent des degats
 
-        for (Tourelle t: listeTourelles) {
+        /*for (Tourelle t: listeTourelles) {
             t.agir();
         }
 
@@ -188,10 +189,10 @@ public class Environnement {
             if (l.getEnnemiVise() == null){
                 listeLasers.clear();
             }
-        }
+        }*/
         for (Ennemi e : ennemisASupp){
             this.retirerEnnemi(e);
-        }
+        }/*
         if(nbTours % 2 == 0) {
             listeLasers.clear();
         }
@@ -199,10 +200,11 @@ public class Environnement {
             if (e.estSurChemin()){
                 e.retablirVitesse();
             }
-        }
+        }*/
 
         nbTours++;
-    }*/
+    }
+
 
     public Joueur getJoueur() {
         return this.joueur;

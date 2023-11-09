@@ -46,7 +46,7 @@ public class GestionnaireVagues {
         if (Environnement.vagueActuelleProperty.get() >= NB_VAGUES_JEU_TRANSITION_ENNEMIS_DIFF) {
             nombreEnnemis += ennemisSupplementaires;
             for (int i = 0; i < nombreEnnemis; i++) {
-                EnnemiDifficile ennemiDifficile = new EnnemiDifficile(environnement.getParcoursBFS(), terrain);
+                EnnemiDifficile ennemiDifficile = new EnnemiDifficile(terrain);
                 listeEnnemisASpawn.add(ennemiDifficile);
             }
         } else {
@@ -60,15 +60,15 @@ public class GestionnaireVagues {
                 }
                 switch (typeEnnemi) {
                     case 0:
-                        EnnemiFacile ennemiFacile = new EnnemiFacile(environnement.getParcoursBFS(), terrain);
+                        EnnemiFacile ennemiFacile = new EnnemiFacile(terrain);
                         listeEnnemisASpawn.add(ennemiFacile);
                         break;
                     case 1:
-                        EnnemiMoyen ennemiMoyen = new EnnemiMoyen(environnement.getParcoursBFS(), terrain);
+                        EnnemiMoyen ennemiMoyen = new EnnemiMoyen(terrain);
                         listeEnnemisASpawn.add(ennemiMoyen);
                         break;
                     case 2:
-                        EnnemiDifficile ennemiDifficile = new EnnemiDifficile(environnement.getParcoursBFS(), terrain);
+                        EnnemiDifficile ennemiDifficile = new EnnemiDifficile(terrain);
                         listeEnnemisASpawn.add(ennemiDifficile);
                         break;
                 }

@@ -5,8 +5,8 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 public class EnnemiFacile extends Ennemi {
 
-    public EnnemiFacile(ParcoursBFS parcoursBFS, Terrain terrain){
-        super(50,4,1,parcoursBFS,terrain);
+    public EnnemiFacile(Terrain terrain){
+        super(50,4,1,terrain, new DeplacementSelonLeBFS(terrain));
     }
 
     @Override

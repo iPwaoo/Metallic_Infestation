@@ -344,16 +344,7 @@ public class JeuControleur implements Initializable {
                         gameLoop.stop();
                     } else {
 
-                        //env.unTour(gestionnaireVagues);
-                        /*for (ObjetPlacable o : this.env.getListePlacables()){
-                            if (o instanceof Pics) {
-                                if () {
-                                    placableVue.actionnerPics((Obstacle) o);
-                                } else {
-                                    placableVue.actionnerPics((Obstacle) o);
-                                }
-                            }
-                        }*/
+                        env.unTour(gestionnaireVagues);
                         if (joueur.pvJoueurProprerty().get() <= 0){
                             gameOverLabel.setVisible(true);
                             gameLoop.stop();

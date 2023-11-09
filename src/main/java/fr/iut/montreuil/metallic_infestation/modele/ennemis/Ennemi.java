@@ -1,13 +1,9 @@
 package fr.iut.montreuil.metallic_infestation.modele.ennemis;
 
 
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.ParcoursBFS;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
-
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Ennemi extends ElementDeplacable{
 
@@ -17,18 +13,17 @@ public abstract class Ennemi extends ElementDeplacable{
 
     private Terrain terrain;
 
+    private StrategieDeplacement strategieDéplacement;
 
-    private ParcoursBFS parcoursBFS;
-    private Case caseDestination;
+    Case caseDestination;
 
-
-
-    public Ennemi (int pv, int vitesse, int drop, ParcoursBFS parcoursBFS, Terrain terrain){
+    public Ennemi (int pv, int vitesse, int drop, Terrain terrain, StrategieDeplacement strategieDéplacement){
         super(new Point(0,0),vitesse);
         this.pv = pv;
         // Piece Lootées par les ennemis
         this.drop = drop;
         this.terrain = terrain;
+        this.strategieDéplacement = strategieDéplacement;
         // Position de Départ Aléatoire ( /!\ On part du principe que pour chaque map, les spawns des ennemis se trouvent en x = 0 et y aleatoire ou en y = 0 et x aléatoire
         boolean coordonneesChemin;
         do {
@@ -46,10 +41,8 @@ public abstract class Ennemi extends ElementDeplacable{
                 coordonneesChemin = terrain.cheminSurCase(new Case(0,(int)(randX) / terrain.getTailleCase()));
             }
         } while (!coordonneesChemin);
-        this.parcoursBFS = parcoursBFS;
-        parcoursBFS.remplirGrilleBFS();
-        this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.getCase());
 
+        this.caseDestination = strategieDéplacement.metAJourLaCaseDeDestination(this.getCase());
     }
     public int getPv(){
         return this.pv;
@@ -64,9 +57,6 @@ public abstract class Ennemi extends ElementDeplacable{
         return this.getCoordonnees().getCase();
     }
 
-    public ParcoursBFS getParcoursBFS() {
-        return parcoursBFS;
-    }
 
     public void seDeplacer() {
 
@@ -89,7 +79,7 @@ public abstract class Ennemi extends ElementDeplacable{
         }
 
         if (this.getCase().equals(this.caseDestination)) {
-            this.caseDestination = parcoursBFS.caseLaPlusProcheDArrivee(this.caseDestination);
+            this.caseDestination = strategieDéplacement.metAJourLaCaseDeDestination(this.caseDestination);
         }
 
 
