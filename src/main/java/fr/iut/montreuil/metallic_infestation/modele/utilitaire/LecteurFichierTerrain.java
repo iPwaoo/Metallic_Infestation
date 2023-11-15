@@ -5,7 +5,19 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class LecteurFichierTerrain {
-    public static int[][] litFichier(String chemin, int tailleMatrice){
+
+    private static LecteurFichierTerrain uniqueInstance = null;
+    private LecteurFichierTerrain (){
+        //vide
+    }
+
+    public static LecteurFichierTerrain getInstance(){
+        if (uniqueInstance== null){
+            uniqueInstance = new LecteurFichierTerrain();
+        }
+        return uniqueInstance;
+    }
+    public int[][] litFichier(String chemin, int tailleMatrice){
         int[][] tableauTerrain = new int[tailleMatrice][tailleMatrice];
 
         try (BufferedReader br = new BufferedReader(new FileReader(chemin))) {

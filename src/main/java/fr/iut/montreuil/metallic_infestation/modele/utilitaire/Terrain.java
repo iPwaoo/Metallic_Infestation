@@ -17,11 +17,14 @@ public class Terrain {
      */
     private int[][] terrain;
 
+    private LecteurFichierTerrain lecteurFichierTerrain;
+
     private static final int tailleCase = 32;
 
     private ArrayList<Case> listeCasesDepartsPossibles;
 
     private Terrain() {
+        lecteurFichierTerrain = LecteurFichierTerrain.getInstance();
         terrain = new int[23][23];
     }
 
@@ -104,7 +107,7 @@ public class Terrain {
     }
 
     public void chargeTerrain(String chemin){
-        this.terrain = this.terrain = LecteurFichierTerrain.litFichier(chemin, 23);
+        this.terrain = lecteurFichierTerrain.litFichier(chemin, 23);
     }
 
 
