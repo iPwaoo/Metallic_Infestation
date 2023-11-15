@@ -1,7 +1,7 @@
 package fr.iut.montreuil.metallic_infestation.controleur;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.LiaisonEntreLeMenuEtLeJeu;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,11 +29,14 @@ public class MenuControleur implements Initializable {
     private JeuApplication jeuApplication;
     private Stage jeuMap, stageActuel;
 
+    private Terrain terrain = Terrain.getInstance();
+
 
 
     @FXML
     void demarreMAP1(ActionEvent event) {
-        LiaisonEntreLeMenuEtLeJeu.nbTerrain = 1;
+        //LiaisonEntreLeMenuEtLeJeu.nbTerrain = 1;
+        terrain.chargeTerrain("src/main/resources/fr/iut/montreuil/metallic_infestation/Terrains/terrain1.txt");
         try {
             jeuApplication.start(jeuMap);
             stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -45,7 +48,8 @@ public class MenuControleur implements Initializable {
 
     @FXML
     void demarreMAP2(ActionEvent event) {
-        LiaisonEntreLeMenuEtLeJeu.nbTerrain = 2;
+        //LiaisonEntreLeMenuEtLeJeu.nbTerrain = 2;
+        terrain.chargeTerrain("src/main/resources/fr/iut/montreuil/metallic_infestation/Terrains/terrain2.txt");
         try {
             jeuApplication.start(jeuMap);
             stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -57,7 +61,8 @@ public class MenuControleur implements Initializable {
 
     @FXML
     void demarreMAP3(ActionEvent event) {
-        LiaisonEntreLeMenuEtLeJeu.nbTerrain = 3;
+        //LiaisonEntreLeMenuEtLeJeu.nbTerrain = 3;
+        terrain.chargeTerrain("src/main/resources/fr/iut/montreuil/metallic_infestation/Terrains/terrain3.txt");
         try {
             jeuApplication.start(jeuMap);
             stageActuel = (Stage) ((Node) event.getSource()).getScene().getWindow();

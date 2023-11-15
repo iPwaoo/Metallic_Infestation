@@ -1,8 +1,5 @@
 package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
-import fr.iut.montreuil.metallic_infestation.modele.utilitaire.LiaisonEntreLeMenuEtLeJeu;
-
 import java.util.ArrayList;
 
 public class Terrain {
@@ -25,15 +22,7 @@ public class Terrain {
     private ArrayList<Case> listeCasesDepartsPossibles;
 
     private Terrain() {
-        if (LiaisonEntreLeMenuEtLeJeu.nbTerrain == 1) {
-            this.terrain = LecteurFichierTerrain.litFichier("src/main/resources/fr/iut/montreuil/metallic_infestation/Terrains/terrain1.txt", 23);
-        }
-        else if (LiaisonEntreLeMenuEtLeJeu.nbTerrain == 2) {
-            this.terrain = LecteurFichierTerrain.litFichier("src/main/resources/fr/iut/montreuil/metallic_infestation/Terrains/terrain2.txt", 23);
-        }
-        else {
-            this.terrain = LecteurFichierTerrain.litFichier("src/main/resources/fr/iut/montreuil/metallic_infestation/Terrains/terrain3.txt", 23);
-        }
+        terrain = new int[23][23];
     }
 
     public static Terrain getInstance(){
@@ -112,6 +101,10 @@ public class Terrain {
             }
             System.out.println();
         }
+    }
+
+    public void chargeTerrain(String chemin){
+        this.terrain = this.terrain = LecteurFichierTerrain.litFichier(chemin, 23);
     }
 
 
