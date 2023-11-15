@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ImpactSimpleEffet extends EffetProjectile{
     public ImpactSimpleEffet(Point position, int degats, int rayon){
-        super(position,degats,rayon);
+        super(position,degats,rayon,1);
     }
 
     public void action(ArrayList<Ennemi> ennemis) {

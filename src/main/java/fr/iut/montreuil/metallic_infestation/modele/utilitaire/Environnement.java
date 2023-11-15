@@ -1,6 +1,7 @@
 package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 
+import fr.iut.montreuil.metallic_infestation.modele.Projectiles.Projectile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;

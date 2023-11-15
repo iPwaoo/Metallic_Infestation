@@ -5,9 +5,11 @@ import fr.iut.montreuil.metallic_infestation.modele.Projectiles.EffetsProjectile
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.ElementDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -19,16 +21,18 @@ public abstract class Projectile extends ElementDeplacable {
     private EffetProjectile effet;
     private int durabilite;
     private DoubleProperty angleProperty;
+    private int idType;
 
-    public Projectile(Point coordonees, Point cible, int vitesse, int rayon, int durabilite) {
-        super(coordonees, vitesse);
+    public Projectile(Point coordonees, Point cible, int vitesse, int rayon, int durabilite, int idType) {
+        super(new Point(coordonees.getX(),coordonees.getY()), vitesse);
+        this.idType=idType;
         this.cible = cible;
         this.rayon = rayon;
         this.durabilite = durabilite;
         this.angleProperty = new SimpleDoubleProperty(Math.toDegrees(Math.atan2(this.cible.getY() - this.getCoordonnees().getY(), this.cible.getX() - this.getCoordonnees().getX())));
     }
 
-    public void unTour(ArrayList<Ennemi> ennemis){
+    public void unTour(ObservableList<Ennemi> ennemis){
             seDeplace();
             agit(ennemis);
     }
@@ -37,14 +41,14 @@ public abstract class Projectile extends ElementDeplacable {
         this.comportement.seDeplacer();
     }
 
-    public void agit(ArrayList<Ennemi> ennemis) {
+    public void agit(ObservableList<Ennemi> ennemis) {
         if (aTouche(ennemis)||estSurCible()) {
             this.effet.action(ennemis);
             durabilite--;
         }
     }
 
-    public boolean aTouche(ArrayList<Ennemi> ennemis) {
+    public boolean aTouche(ObservableList<Ennemi> ennemis) {
         for (Ennemi e : ennemis) {
             if (Math.sqrt(Math.pow(e.getCoordonnees().getX() - this.coordonnees.getX(), 2) + Math.pow(e.getCoordonnees().getY() - this.coordonnees.getY(), 2)) <= rayon)
                 return true;
@@ -88,23 +92,19 @@ public abstract class Projectile extends ElementDeplacable {
         durabilite=0;
     }
 
-    //    public boolean equals(Projectile p){
-//        return this.getId() == p.getId();
-//    }
-//
-//
-//    public abstract void seDeplacer();
-//
-//    public boolean arriveSurEnnemi(){
-//        return this.coordonnees.getCase().equals(this.ennemiVise.getCase());
-//    }
-//
-//    public Tourelle getTourelle() {
-//        return this.tourelle;
-//    }
-//
-//    public Ennemi getEnnemiVise() {
-//        return ennemiVise;
-//    }
+    public int getDurabilite() {
+        return durabilite;
+    }
 
+    public DoubleProperty getAngleProperty() {
+        return angleProperty;
+    }
+
+    public DoubleProperty anglePropertyProperty() {
+        return angleProperty;
+    }
+
+    public int getIdType() {
+        return idType;
+    }
 }
