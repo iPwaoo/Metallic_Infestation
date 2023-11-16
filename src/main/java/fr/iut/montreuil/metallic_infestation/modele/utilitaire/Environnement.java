@@ -190,6 +190,10 @@ public class Environnement {
             }
         }
 
+        for (ObjetPlacable e: listePlacables) {
+            e.agir();
+        }
+
         nbTours++;
     }
 
@@ -236,31 +240,6 @@ public class Environnement {
 
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
-    }
-
-    public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
-        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<Ennemi>();
-        for (int zoneTest = 1; zoneTest <= portee; zoneTest++) {
-            for (int i = zoneTest * -1; i <= zoneTest; i++) {
-                for (int j = zoneTest * -1; j <= zoneTest; j++) {
-                    if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
-
-                        Ennemi ennemiCase = ennemiSurCase(new Case(emplacement.getI() + i, emplacement.getJ() + j));
-                        if (ennemiCase != null) {
-                            ennemisLesPlusProches.add(ennemiCase);
-                        }
-                    }
-                }
-            }
-        }
-        return ennemisLesPlusProches;
-    }
-    public Ennemi ennemiLePlusProche(Case emplacement, int portee) {
-        ArrayList<Ennemi> ennemis = ennemisLesPlusProches(emplacement, portee);
-        if (!ennemis.isEmpty()) {
-            return ennemis.get(0);
-        }
-        return null;
     }
 }
 

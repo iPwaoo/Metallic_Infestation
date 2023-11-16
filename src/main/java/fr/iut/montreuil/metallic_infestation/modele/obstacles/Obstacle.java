@@ -1,18 +1,23 @@
 package fr.iut.montreuil.metallic_infestation.modele.obstacles;
 
+import fr.iut.montreuil.metallic_infestation.modele.Projectiles.EffetsProjectile.EffetProjectile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
+import javafx.scene.effect.Effect;
 
-public abstract class Obstacle extends ObjetPlacable {
+public class Obstacle extends ObjetPlacable {
 
     int pv;
 
-    public Obstacle(Case emplacement, Environnement environnement, Terrain terrain, int cout, int pv){
+    EffetProjectile effet;
+
+    public Obstacle(Case emplacement, Environnement environnement, Terrain terrain, int cout, int pv, EffetProjectile effet){
         super(emplacement, environnement,terrain, cout);
         this.pv = pv;
+        this.effet = effet;
     }
     @Override
     public boolean peutSePoser() {
@@ -28,9 +33,14 @@ public abstract class Obstacle extends ObjetPlacable {
     }
 
 
-    public  void agir() {
-        //TODO A besoin des effets
+
+    public void agir() {
+        Ennemi e = environnement.ennemiSurCase(getEmplacement());
+        if(e != null){
+            effet.action(environnement.getListeEnnemis());
+        }
     }
+
 
     public void decrementerPV(int pvPerdu){
         this.pv -= pvPerdu;

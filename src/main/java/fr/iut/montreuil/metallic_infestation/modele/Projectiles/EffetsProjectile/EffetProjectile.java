@@ -4,6 +4,7 @@ import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class EffetProjectile {
     private Point position;
@@ -16,7 +17,7 @@ public abstract class EffetProjectile {
         this.rayon=rayon;
     }
 
-    public abstract void action(ArrayList<Ennemi> ennemis);
+    public abstract void action(List<Ennemi> ennemis);
 
     public Point getPosition() {
         return position;
