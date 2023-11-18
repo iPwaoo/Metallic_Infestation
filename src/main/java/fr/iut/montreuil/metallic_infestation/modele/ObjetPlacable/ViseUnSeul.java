@@ -1,11 +1,10 @@
-package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
+package fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable;
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Distance;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 

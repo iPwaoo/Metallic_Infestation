@@ -1,9 +1,11 @@
-package fr.iut.montreuil.metallic_infestation.modele.obstacles;
+package fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable;
 
-import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
+
+import java.util.ArrayList;
 
 public abstract class   ObjetPlacable {
     private Case emplacement;
@@ -11,14 +13,20 @@ public abstract class   ObjetPlacable {
     private Terrain terrain;
     private int cout;
 
-    private Ennemi ennemiVisee;
+    protected int dureeDeVie;
 
-    public ObjetPlacable (Case emplacement, Environnement environnement, Terrain terrain, int cout){
+    private StratVise stratVise;
+
+    private int portee;
+
+    public ObjetPlacable (Case emplacement, Environnement environnement, Terrain terrain, int cout, StratVise stratVise, int porte){
         this.emplacement = emplacement;
         this.environnement = environnement;
         this.terrain = terrain;
         this.cout = cout;
-        this.ennemiVisee = null;
+        this.dureeDeVie = 0;
+        this.stratVise = stratVise;
+        this.portee = porte;
     }
 
     public abstract boolean peutSePoser();
@@ -26,7 +34,17 @@ public abstract class   ObjetPlacable {
     public abstract int getType();
 
 
-    public abstract void agir();
+    public void agir(){
+        ArrayList<Point> coordonnesVise = stratVise.chercherEnnemie(environnement,emplacement,portee);
+            if (!coordonnesVise.isEmpty()) {
+                for (Point p : coordonnesVise) {
+                    lanceSentence(coordonnesVise);
+                }
+            }
+        dureeDeVie++;
+    }
+
+    public abstract void lanceSentence(ArrayList<Point> points);
     public boolean poserPlacable(){
         if(peutSePoser()){
             System.out.println("Staline" + getType());

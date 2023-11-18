@@ -1,13 +1,13 @@
-package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
+package fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles;
 
 
-import fr.iut.montreuil.metallic_infestation.modele.ennemis.EnnemiDifficile;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.StratVise;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.*;
 
 import java.util.ArrayList;
 
 public class TourelleAuto extends Tourelle {
-    public TourelleAuto(Environnement env,Case position, StratVise strategie, Terrain terrain) {
+    public TourelleAuto(Environnement env, Case position, StratVise strategie, Terrain terrain) {
         super(30, 3, env, 2, position, strategie, terrain);
     }
 

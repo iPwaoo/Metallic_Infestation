@@ -1,5 +1,6 @@
 package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
 
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles.Tourelle;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Explosion;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;

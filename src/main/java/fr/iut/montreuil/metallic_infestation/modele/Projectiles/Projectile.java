@@ -4,7 +4,6 @@ import fr.iut.montreuil.metallic_infestation.modele.Projectiles.ComportementsPro
 import fr.iut.montreuil.metallic_infestation.modele.Projectiles.EffetsProjectile.EffetProjectile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.ElementDeplacable;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Distance;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import javafx.beans.property.DoubleProperty;

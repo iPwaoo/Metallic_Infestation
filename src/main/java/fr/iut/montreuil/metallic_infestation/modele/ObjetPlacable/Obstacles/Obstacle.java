@@ -1,12 +1,15 @@
-package fr.iut.montreuil.metallic_infestation.modele.obstacles;
+package fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Obstacles;
 
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.ObjetPlacable;
 import fr.iut.montreuil.metallic_infestation.modele.Projectiles.EffetsProjectile.EffetProjectile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.ViseSurCase;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
+import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
-import javafx.scene.effect.Effect;
+
+import java.util.ArrayList;
 
 public class Obstacle extends ObjetPlacable {
 
@@ -14,8 +17,8 @@ public class Obstacle extends ObjetPlacable {
 
     EffetProjectile effet;
 
-    public Obstacle(Case emplacement, Environnement environnement, Terrain terrain, int cout, int pv, EffetProjectile effet){
-        super(emplacement, environnement,terrain, cout);
+    public Obstacle(Case emplacement, Environnement environnement, Terrain terrain, int cout, int pv, EffetProjectile effet, int portee){
+        super(emplacement, environnement,terrain, cout, new ViseSurCase(), portee);
         this.pv = pv;
         this.effet = effet;
     }
@@ -32,12 +35,16 @@ public class Obstacle extends ObjetPlacable {
         return 4;
     }
 
+    @Override
+    public void lanceSentence(ArrayList<Point> points) {
+        ArrayList<Ennemi> lesEnnemis = new ArrayList<Ennemi>();
+        for (Point p: points) {
+            lesEnnemis.add(environnement.ennemiSurCase(new Case(p.getY()/32, p.getX()/32)));
+        }
 
-
-    public void agir() {
-        Ennemi e = environnement.ennemiSurCase(getEmplacement());
-        if(e != null){
+        if(lesEnnemis != null){
             effet.action(environnement.getListeEnnemis());
+            decrementerPV(1);
         }
     }
 

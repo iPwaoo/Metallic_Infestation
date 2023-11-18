@@ -1,7 +1,7 @@
 package fr.iut.montreuil.metallic_infestation.modele.Projectiles.ComportementsProjectile;
 
 import fr.iut.montreuil.metallic_infestation.modele.Projectiles.Projectile;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles.Tourelle;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 
 import java.util.ArrayList;

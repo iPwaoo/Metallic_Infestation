@@ -1,9 +1,13 @@
 package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.Mine;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.*;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Obstacles.Mine;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Obstacles.Obstacle;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Obstacles.Pics;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles.Tourelle;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles.TourelleAuto;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles.TourelleMissiles;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles.TourelleSemi;
 
 public class Boutique {
     private static Boutique uniqueInstance = null;

@@ -1,7 +1,6 @@
-package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
+package fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles;
 
-import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.StratVise;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 public class TourelleMissiles extends Tourelle {
 
 
-    public TourelleMissiles( Environnement env, Case position, StratVise strategie, Terrain terrain) {
+    public TourelleMissiles(Environnement env, Case position, StratVise strategie, Terrain terrain) {
         super(50, 5, env, 100, position, strategie, terrain);
     }
 

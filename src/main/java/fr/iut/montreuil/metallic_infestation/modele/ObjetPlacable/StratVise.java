@@ -1,4 +1,4 @@
-package fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles;
+package fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable;
 
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;

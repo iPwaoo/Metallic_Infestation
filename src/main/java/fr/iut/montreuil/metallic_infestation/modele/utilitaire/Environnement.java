@@ -2,7 +2,7 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 
 
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.ObjetPlacable;
 import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -29,11 +29,9 @@ public class Environnement {
     private Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
-        //this.listeTourelles = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
         this.listeLasers = FXCollections.observableArrayList();
         this.listExplosions = FXCollections.observableArrayList();
-        //this.listeObstacles = FXCollections.observableArrayList();
         this.listePlacables = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = ParcoursBFS.getInstance();
@@ -189,9 +187,8 @@ public class Environnement {
                 e.retablirVitesse();
             }
         }
-
-        for (ObjetPlacable e: listePlacables) {
-            e.agir();
+        for (int i = listePlacables.size()-1; i >= 0; i--){
+            listePlacables.get(i).agir();
         }
 
         nbTours++;
