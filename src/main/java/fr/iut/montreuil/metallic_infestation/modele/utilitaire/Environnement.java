@@ -89,21 +89,7 @@ public class Environnement {
 
     public ObservableList<Explosion> getListExplosions(){return listExplosions;}
 
-    public void ajouterProjectile(Projectile p) {
-        listeProjectiles.add(p);
-    }
 
-    public Projectile retirerProjectile(Projectile p) {
-        Projectile supprime = null;
-        for (int i = this.getListeProjectiles().size() - 1; i >= 0; i--) {
-            if (this.getListeProjectiles().get(i).equals(p)) {
-                supprime = this.getListeProjectiles().get(i);
-                this.getListeProjectiles().remove(i);
-                break;
-            }
-        }
-        return supprime;
-    }
     public Ennemi retirerEnnemi(Ennemi e){
         Ennemi supprime = null;
         for (int i = this.listeEnnemis.size() - 1 ; i >= 0 ; i--){
@@ -145,8 +131,8 @@ public class Environnement {
     }
 
     private void faireAgirObjet(){
-        for (ObjetPlacable o : listePlacables){
-            o.agir();
+        for (int i = 0; i < listePlacables.size() ;i++){
+            listePlacables.get(i).agir();
         }
     }
 
@@ -164,8 +150,6 @@ public class Environnement {
                 this.retirerEnnemi(e);
             }
         }
-
-
     }
 
     public Joueur getJoueur() {
@@ -180,20 +164,6 @@ public class Environnement {
         }
     }
 
-    /**
-     * Regarde si ennemi est déjà visé par un laser
-     * @param e
-     * @return
-     */
-    public boolean destEstPresent (Ennemi e){
-        for (Laser l: listeLasers) {
-            if (e == l.getEnnemiVise()){
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void retirerExplosion(Explosion e){
         for (int i = listExplosions.size()-1 ; i >= 0 ; i--){
             if (listExplosions.get(i).equals(e)){
@@ -205,38 +175,11 @@ public class Environnement {
     public IntegerProperty vagueActuelleProperty(){
         return this.vagueActuelleProperty;
     }
-    public void setVagueActuelleProperty(int n ){
-        this.vagueActuelleProperty().setValue(n);
-    }
 
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
 
-    public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
-        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<Ennemi>();
-        for (int zoneTest = 1; zoneTest <= portee; zoneTest++) {
-            for (int i = zoneTest * -1; i <= zoneTest; i++) {
-                for (int j = zoneTest * -1; j <= zoneTest; j++) {
-                    if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
-
-                        Ennemi ennemiCase = ennemiSurCase(new Case(emplacement.getI() + i, emplacement.getJ() + j));
-                        if (ennemiCase != null) {
-                            ennemisLesPlusProches.add(ennemiCase);
-                        }
-                    }
-                }
-            }
-        }
-        return ennemisLesPlusProches;
-    }
-    public Ennemi ennemiLePlusProche(Case emplacement, int portee) {
-        ArrayList<Ennemi> ennemis = ennemisLesPlusProches(emplacement, portee);
-        if (!ennemis.isEmpty()) {
-            return ennemis.get(0);
-        }
-        return null;
-    }
     public void ajouterPlusieursEnnemis(ArrayList<Ennemi> ennemis){
         for (int i = 0; i < ennemis.size(); i++){
             ajouterUnEnnemi(ennemis.get(i));
@@ -246,9 +189,4 @@ public class Environnement {
     public void ajouterUnEnnemi(Ennemi e){
         this.listeEnnemis.add(e);
     }
-
-
 }
-
-
-

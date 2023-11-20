@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ViseSurCase implements StratVise{
     @Override
     public ArrayList<Point> chercherEnnemie(Environnement env, Case position, int portee) {
-        ArrayList<Point> coordonneeEnnemi = new ArrayList<Point>();
+        ArrayList<Point> coordonneeEnnemi = new ArrayList<>();
         for (Ennemi e: env.getListeEnnemis()) {
             if(e.getCase().equals(position)){
                 coordonneeEnnemi.add(e.getCoordonnees());

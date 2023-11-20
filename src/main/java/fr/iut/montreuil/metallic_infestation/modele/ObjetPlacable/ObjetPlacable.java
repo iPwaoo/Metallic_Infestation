@@ -37,9 +37,7 @@ public abstract class ObjetPlacable {
     public void agir(){
         ArrayList<Point> coordonnesVise = stratVise.chercherEnnemie(environnement,emplacement,portee);
             if (!coordonnesVise.isEmpty()) {
-                for (Point p : coordonnesVise) {
-                    lanceSentence(coordonnesVise);
-                }
+                lanceSentence(coordonnesVise);
             }
         dureeDeVie++;
     }

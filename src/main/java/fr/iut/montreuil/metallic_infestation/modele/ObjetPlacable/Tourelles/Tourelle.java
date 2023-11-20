@@ -26,7 +26,7 @@ public abstract class Tourelle extends ObjetPlacable {
     }
 
     public void lanceSentence(ArrayList<Point> points){
-        if(dureeDeVie % rechargement ==0){
+        if(dureeDeVie % rechargement == 0){
             creerProjectile(points);
         }
     }

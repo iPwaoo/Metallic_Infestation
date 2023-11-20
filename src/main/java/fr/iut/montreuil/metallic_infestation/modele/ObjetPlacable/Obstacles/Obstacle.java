@@ -42,7 +42,7 @@ public class Obstacle extends ObjetPlacable {
             lesEnnemis.add(environnement.ennemiSurCase(new Case(p.getY()/32, p.getX()/32)));
         }
 
-        if(lesEnnemis != null){
+        if(!lesEnnemis.isEmpty()){
             effet.action(environnement.getListeEnnemis());
             decrementerPV(1);
         }
