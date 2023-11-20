@@ -5,7 +5,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Environnement;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
-public abstract class   ObjetPlacable {
+public abstract class ObjetPlacable {
     private Case emplacement;
     protected Environnement environnement;
     private Terrain terrain;
