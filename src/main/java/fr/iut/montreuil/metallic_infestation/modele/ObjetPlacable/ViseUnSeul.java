@@ -33,7 +33,6 @@ public class ViseUnSeul implements StratVise{
             pointLePlusProche.add(save.getCoordonnees());
             return pointLePlusProche;
         }else
-            return null;
-
+            return pointLePlusProche;
     }
 }

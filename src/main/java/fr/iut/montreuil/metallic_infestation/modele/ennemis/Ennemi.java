@@ -6,19 +6,18 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 
 public abstract class Ennemi extends ElementDeplacable{
-
-
+    private final int TEMPS_DE_RECHARGE_DEPLACEMENT = 2;
     private int pv;
     private int drop;
-
     private Terrain terrain;
-
     private StrategieDeplacement strategieDéplacement;
+    int tempsDeVie;
 
     Case caseDestination;
 
     public Ennemi (int pv, int vitesse, int drop, Terrain terrain, StrategieDeplacement strategieDéplacement){
         super(new Point(0,0),vitesse);
+        this.tempsDeVie = 0;
         this.pv = pv;
         // Piece Lootées par les ennemis
         this.drop = drop;
@@ -60,29 +59,30 @@ public abstract class Ennemi extends ElementDeplacable{
 
     public void seDeplacer() {
 
-        int distanceX = this.caseDestination.getJ() * terrain.getTailleCase() - this.getCoordonnees().getX();
-        int distanceY = this.caseDestination.getI() * terrain.getTailleCase() - this.getCoordonnees().getY();
+        if (tempsDeVie % TEMPS_DE_RECHARGE_DEPLACEMENT == 0) {
+            int distanceX = this.caseDestination.getJ() * terrain.getTailleCase() - this.getCoordonnees().getX();
+            int distanceY = this.caseDestination.getI() * terrain.getTailleCase() - this.getCoordonnees().getY();
 
-        int deplacementX = Math.min(getVitesse(), Math.abs(distanceX));
-        int deplacementY = Math.min(getVitesse(), Math.abs(distanceY));
+            int deplacementX = Math.min(getVitesse(), Math.abs(distanceX));
+            int deplacementY = Math.min(getVitesse(), Math.abs(distanceY));
 
-        if (distanceX < 0) {
-            this.coordonnees.setX(this.coordonnees.getX() - deplacementX);
-        } else if (distanceX > 0) {
-            this.coordonnees.setX(this.coordonnees.getX() + deplacementX);
+            if (distanceX < 0) {
+                this.coordonnees.setX(this.coordonnees.getX() - deplacementX);
+            } else if (distanceX > 0) {
+                this.coordonnees.setX(this.coordonnees.getX() + deplacementX);
+            }
+
+            if (distanceY < 0) {
+                this.coordonnees.setY(this.coordonnees.getY() - deplacementY);
+            } else if (distanceY > 0) {
+                this.coordonnees.setY(this.coordonnees.getY() + deplacementY);
+            }
+
+            if (this.getCase().equals(this.caseDestination)) {
+                this.caseDestination = strategieDéplacement.metAJourLaCaseDeDestination(this.caseDestination);
+            }
         }
-
-        if (distanceY < 0) {
-            this.coordonnees.setY(this.coordonnees.getY() - deplacementY);
-        } else if (distanceY > 0) {
-            this.coordonnees.setY(this.coordonnees.getY() + deplacementY);
-        }
-
-        if (this.getCase().equals(this.caseDestination)) {
-            this.caseDestination = strategieDéplacement.metAJourLaCaseDeDestination(this.caseDestination);
-        }
-
-
+        this.tempsDeVie++;
     }
 
 

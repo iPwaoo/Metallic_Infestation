@@ -7,7 +7,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
 
 import java.util.ArrayList;
 
-public abstract class   ObjetPlacable {
+public abstract class ObjetPlacable {
     private Case emplacement;
     protected Environnement environnement;
     private Terrain terrain;

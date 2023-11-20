@@ -22,7 +22,6 @@ public class Environnement {
 
     private ObservableList<ObjetPlacable> listePlacables;
     private ArrayList<Ennemi> ennemisASpawn;
-
     private ParcoursBFS parcoursBFS;
     public int nbTours;
     private ObservableList<Laser> listeLasers;
@@ -118,80 +117,55 @@ public class Environnement {
 
     public void unTour(GestionnaireVagues gestionnaireVagues) {
 
-        ArrayList<Ennemi> ennemisASupp = new ArrayList<>();
-        if (this.joueur.pvJoueurProprerty().get() <= 0){
-        }
-        if (this.nbTours % 700 == 0 || nbTours == 100) {
-            ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
+        ennemisASpawn = gestionnaireVagues.lancerProchaineVague(terrain);
 
-        }
+
         if (this.nbTours % 20 == 0 && !ennemisASpawn.isEmpty()) {
-            this.getListeEnnemis().add(ennemisASpawn.remove(ennemisASpawn.size() - 1));
+            ajouterPlusieursEnnemis(ennemisASpawn);
         }
+        this.traitementEnnemies();
+        this.faireAgirObjet();
 
-        if (this.nbTours % 2 == 0) {
-
-            for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
-                Ennemi e = this.getListeEnnemis().get(idEnnemi);
-                e.seDeplacer();
-                if (e.aAtteintLaCible()) {
-                    ennemisASupp.add(e);
-                    joueur.debiterPvJoueurProperty(e.getDrop());
-                } else if (e.estMort()) {
-                    ennemisASupp.add(e);
-                    joueur.crediterArgentProperty(e.getDrop());
-                }
-            }
-        }
-        //todo faire l'appelle pour deplacer les projectiles et qu'ils infligent des degats
-
-//        for (Tourelle t: listeTourelles) {
-//            t.agir();
-//        }
-//
-//        if (!listeObstacles.isEmpty()) {
-//            for (int i = listeObstacles.size() - 1; i >= 0; i--) {
-//                for (Ennemi e : listeEnnemis) {
-//                    if (listeObstacles.get(i).ennemisSurObstacle()) {
-//                        if (listeObstacles.get(i) instanceof Pics) {
-//                            if (listeObstacles.get(i).ennemisSurObstacle()) {
-//                                ((Pics) listeObstacles.get(i)).actionnerPics(e);
-//                            }
-//                        } else if (listeObstacles.get(i) instanceof Mine) {
-//                            terrain.setCase(listeObstacles.get(i).getPosition(), 1);
-//                            Explosion explosion = new Explosion(this,listeObstacles.get(i).getPosition().getCentreCase(), ((Mine) listeObstacles.get(i)).getDegats(),((Mine) listeObstacles.get(i)).getPorteeExplosion());
-//                            listExplosions.add(explosion);
-//                            explosion.infligerDegats();
-//                            this.listeObstacles.remove(listeObstacles.get(i));
-//                            break;
-//                        }
-//                    }
-//
-//                }
-//            }
-//
-//        }
-        for (Laser l : listeLasers){
-            if (l.getEnnemiVise() == null){
-                listeLasers.clear();
-            }
-        }
-        for (Ennemi e : ennemisASupp){
-            this.retirerEnnemi(e);
-        }
-        if(nbTours % 2 == 0) {
-            listeLasers.clear();
-        }
         for (Ennemi e : listeEnnemis){
             if (e.estSurChemin()){
                 e.retablirVitesse();
             }
         }
-        for (int i = listePlacables.size()-1; i >= 0; i--){
-            listePlacables.get(i).agir();
+
+        //Cette partie de la methode est à supprimer à l'avenir. C'est l'ancienne methode du fonctionnement du laser
+        if(nbTours % 2 == 0) {
+            listeLasers.clear();
+        }
+        for (Laser l : listeLasers){
+            if (l.getEnnemiVise() == null){
+                listeLasers.clear();
+            }
+        }
+        nbTours++;
+    }
+
+    private void faireAgirObjet(){
+        for (ObjetPlacable o : listePlacables){
+            o.agir();
+        }
+    }
+
+    private void traitementEnnemies() {
+
+        for (int idEnnemi = this.getListeEnnemis().size() - 1; idEnnemi >= 0; idEnnemi--) {
+            Ennemi e = this.getListeEnnemis().get(idEnnemi);
+            e.seDeplacer();
+            if (e.aAtteintLaCible() || e.estMort()) {
+                if (e.estMort()) {
+                    joueur.crediterArgentProperty(e.getDrop());
+                } else {
+                    joueur.debiterPvJoueurProperty(e.getDrop());
+                }
+                this.retirerEnnemi(e);
+            }
         }
 
-        nbTours++;
+
     }
 
     public Joueur getJoueur() {
@@ -238,6 +212,42 @@ public class Environnement {
     public static void incrementerVagueActuelleProperty(){
         vagueActuelleProperty.set(vagueActuelleProperty.get()+1);
     }
+
+    public ArrayList<Ennemi> ennemisLesPlusProches(Case emplacement, int portee) {
+        ArrayList<Ennemi> ennemisLesPlusProches = new ArrayList<Ennemi>();
+        for (int zoneTest = 1; zoneTest <= portee; zoneTest++) {
+            for (int i = zoneTest * -1; i <= zoneTest; i++) {
+                for (int j = zoneTest * -1; j <= zoneTest; j++) {
+                    if ((i == zoneTest || i == zoneTest * -1) || (j == zoneTest || j == zoneTest * -1)) {
+
+                        Ennemi ennemiCase = ennemiSurCase(new Case(emplacement.getI() + i, emplacement.getJ() + j));
+                        if (ennemiCase != null) {
+                            ennemisLesPlusProches.add(ennemiCase);
+                        }
+                    }
+                }
+            }
+        }
+        return ennemisLesPlusProches;
+    }
+    public Ennemi ennemiLePlusProche(Case emplacement, int portee) {
+        ArrayList<Ennemi> ennemis = ennemisLesPlusProches(emplacement, portee);
+        if (!ennemis.isEmpty()) {
+            return ennemis.get(0);
+        }
+        return null;
+    }
+    public void ajouterPlusieursEnnemis(ArrayList<Ennemi> ennemis){
+        for (int i = 0; i < ennemis.size(); i++){
+            ajouterUnEnnemi(ennemis.get(i));
+        }
+    }
+
+    public void ajouterUnEnnemi(Ennemi e){
+        this.listeEnnemis.add(e);
+    }
+
+
 }
 
 

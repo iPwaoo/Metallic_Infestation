@@ -13,6 +13,9 @@ import java.util.Random;
 public class GestionnaireVagues {
     private final int NB_VAGUES_JEU = 15;
     private final int NB_VAGUES_JEU_TRANSITION_ENNEMIS_DIFF = 10;
+    private final int INTERVAL_MISE_A_JOUR = 700;
+    private final int DEBUT_VAGUE = 100;
+
 
     private final Environnement environnement;
     private Instant debutPartie;
@@ -26,11 +29,13 @@ public class GestionnaireVagues {
 
     public ArrayList<Ennemi> lancerProchaineVague(Terrain terrainExperimental) {
         ArrayList<Ennemi> ennemisASpawn = new ArrayList<>();
-        Environnement.incrementerVagueActuelleProperty();
-        if (Environnement.vagueActuelleProperty.get() < NB_VAGUES_JEU) {
-            if (!estDerniereVague()) {
-                ennemisASpawn = lancerVague(terrainExperimental);
+        if ( this.environnement.nbTours % INTERVAL_MISE_A_JOUR == 0 || this.environnement.nbTours == DEBUT_VAGUE) {
+            Environnement.incrementerVagueActuelleProperty();
+            if (Environnement.vagueActuelleProperty.get() < NB_VAGUES_JEU) {
+                if (!estDerniereVague()) {
+                    ennemisASpawn = lancerVague(terrainExperimental);
 
+                }
             }
         }
         return ennemisASpawn;
