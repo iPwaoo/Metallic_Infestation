@@ -53,6 +53,7 @@ public class Obstacle extends ObjetPlacable {
         this.pv -= pvPerdu;
         if(pv <= 0){
             environnement.retirerPlacable(getEmplacement());
+            getTerrain().setCase(getEmplacement(), 1);
         }
     }
 }
