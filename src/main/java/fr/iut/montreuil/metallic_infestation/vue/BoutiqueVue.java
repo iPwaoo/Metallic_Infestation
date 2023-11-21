@@ -1,7 +1,13 @@
 package fr.iut.montreuil.metallic_infestation.vue;
 
 
-import fr.iut.montreuil.metallic_infestation.JeuApplication;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryObstacles.MineFactory;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryObstacles.ObstacleFactory;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryObstacles.PicsFactory;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryTourelle.TourelleAutoFactory;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryTourelle.TourelleFactory;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryTourelle.TourelleMissileFactory;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryTourelle.TourelleSemiFactory;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Boutique;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Case;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Terrain;
@@ -11,11 +17,7 @@ import javafx.scene.control.Label;
 
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-
-import java.net.URL;
 
 public class BoutiqueVue {
 
@@ -73,26 +75,17 @@ public class BoutiqueVue {
         boutique.AchatPv(300,5);
     }
 
-    public void achatTour(Case c){
-        if (tour1.isSelected()){
-            boutique.achatTour(1, c);
-        }
-        else if (tour2.isSelected()) {
-            boutique.achatTour(2,c);
-        }
-        else {
-            boutique.achatTour(3,c);
-        }
-    }
-
-    public void achatObstacle(Case c) {
-        if (obs1.isSelected()){
-            boutique.achatObstacle(1,c);
-        } else if (obs2.isSelected()){
-            boutique.achatObstacle(2,c);
+    public void achatPlacable(Case c){
+        if(tour1.isSelected()){
+            boutique.achatPlacable(new TourelleSemiFactory(), c);
+        } else if(tour2.isSelected()){
+            boutique.achatPlacable(new TourelleAutoFactory(), c);
+        } else if (tour3.isSelected()){
+            boutique.achatPlacable(new TourelleMissileFactory(), c);
+        } else if (obs1.isSelected()) {
+            boutique.achatPlacable(new PicsFactory(), c);
+        } else {
+            boutique.achatPlacable(new MineFactory(), c);
         }
     }
-
-
-
 }

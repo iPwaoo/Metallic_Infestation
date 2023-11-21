@@ -78,6 +78,13 @@ public class Terrain {
     public boolean obstacleSurCase(Case c) {
         return terrain[c.getI()][c.getJ()] == 4;
     }
+
+    public boolean objetPlacableSurCase (Case c){
+        if(tourSurCase(c) || obstacleSurCase(c)){
+            return true;
+        }
+        return false;
+    }
     public void afficherTerrain(){
         for (int i = 0 ; i < terrain.length ; i++){
             for (int j = 0 ; j < terrain[i].length ; j++){

@@ -24,4 +24,10 @@ module com.application.metallic_infestation {
     opens fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Obstacles to javafx.fxml;
     exports fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles;
     opens fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables;
+    opens fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryTourelle;
+    opens fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryTourelle to javafx.fxml;
+    exports fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryObstacles;
+    opens fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.FactoryPlacables.FactoryObstacles to javafx.fxml;
 }

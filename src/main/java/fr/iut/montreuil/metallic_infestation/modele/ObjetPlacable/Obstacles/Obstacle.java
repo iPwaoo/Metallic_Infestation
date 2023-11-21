@@ -1,6 +1,7 @@
 package fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Obstacles;
 
 import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.ObjetPlacable;
+import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.StratVise;
 import fr.iut.montreuil.metallic_infestation.modele.Projectiles.EffetsProjectile.EffetProjectile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.ViseSurCase;
@@ -17,8 +18,8 @@ public class Obstacle extends ObjetPlacable {
 
     EffetProjectile effet;
 
-    public Obstacle(Case emplacement, Environnement environnement, Terrain terrain, int cout, int pv, EffetProjectile effet, int portee){
-        super(emplacement, environnement,terrain, cout, new ViseSurCase(), portee);
+    public Obstacle(Case emplacement, Environnement environnement, Terrain terrain, int cout, int pv, EffetProjectile effet, StratVise stratVise, int portee){
+        super(emplacement, environnement,terrain, cout, stratVise, portee);
         this.pv = pv;
         this.effet = effet;
     }
