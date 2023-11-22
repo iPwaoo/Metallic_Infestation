@@ -38,8 +38,10 @@ public class Boutique {
     public void achatPlacable(PlacableFactory factory, Case c) {
         ObjetPlacable placable = factory.creerPlacable(c, environnement, terrain);
         if (joueur.achatPossible(placable.getCout())) {
-            environnement.ajouterDansLaListeDesPlacables(placable);
-            joueur.debiterArgentProperty(placable.getCout());
+            if(placable.poserPlacable()){
+                environnement.ajouterDansLaListeDesPlacables(placable);
+                joueur.debiterArgentProperty(placable.getCout());
+            }
         }
     }
 

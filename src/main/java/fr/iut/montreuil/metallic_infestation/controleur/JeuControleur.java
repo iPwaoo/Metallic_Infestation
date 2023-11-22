@@ -268,17 +268,13 @@ public class JeuControleur implements Initializable {
             Case c = new Case((int) event.getY() / terrain.getTailleCase(), (int) event.getX() / terrain.getTailleCase());
 
             if (event.getButton() == MouseButton.PRIMARY){
-                if (this.terrain.emplacementVideSurCase(c) || this.terrain.cheminSurCase(c)) {
-                    boutiqueVue.achatPlacable(c);
-                }
+                boutiqueVue.achatPlacable(c);
             }
         });
         zoneAffichageEnnemis.setOnMouseClicked(event -> {
             Case c = new Case((int) event.getY() / terrain.getTailleCase(), (int) event.getX() / terrain.getTailleCase());
             if (event.getButton() == MouseButton.SECONDARY) {
-                if (this.terrain.objetPlacableSurCase(c)) {
-                    boutique.venteObjetPlacable(c);
-                }
+                boutique.venteObjetPlacable(c);
             }
         });
     }

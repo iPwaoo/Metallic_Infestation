@@ -30,7 +30,7 @@ public class ObjetPlacableVue {
     }
 
     public  void poserPlacable(ObjetPlacable objetPlacable){
-        if (objetPlacable instanceof Tourelle && objetPlacable.poserPlacable()) {
+        if (objetPlacable instanceof Tourelle) {
             if (objetPlacable instanceof TourelleSemi){
                 URL urlImTourelleSemi = JeuApplication.class.getResource("img/tourelle/tourelleSemiEteinte.png");
                 Image imTourelleSemi = new Image(String.valueOf(urlImTourelleSemi));
@@ -84,39 +84,6 @@ public class ObjetPlacableVue {
                 if (placable.getTranslateX() == objetPlacable.getEmplacement().getJ() * 32
                         && placable.getTranslateY() == objetPlacable.getEmplacement().getI() * 32) {
                     enfants.remove(placable);
-                    break;
-                }
-            }
-        }
-    }
-
-
-    public void actionnerPics(Obstacle o) {
-        ObservableList<Node> enfants = zoneAffichageObjet.getChildren();
-        for (Node enfant : enfants) {
-            if (enfant instanceof ImageView) {
-                ImageView obstacle = (ImageView) enfant;
-                if (obstacle.getTranslateX() == o.getEmplacement().getJ() * 32
-                        && obstacle.getTranslateY() == o.getEmplacement().getI() * 32) {
-                    URL urlImPiques2 = JeuApplication.class.getResource("img/obstacles/spikes2.png");
-                    Image imPiques2 = new Image(String.valueOf(urlImPiques2));
-                    ((ImageView) enfant).setImage(imPiques2);
-                    break;
-                }
-            }
-        }
-    }
-
-    public void desactiverPics(Obstacle o){
-        ObservableList<Node> enfants = zoneAffichageObjet.getChildren();
-        for (Node enfant : enfants) {
-            if (enfant instanceof ImageView) {
-                ImageView obstacle = (ImageView) enfant;
-                if (obstacle.getTranslateX() == o.getEmplacement().getJ() * 32
-                        && obstacle.getTranslateY() == o.getEmplacement().getI() * 32) {
-                    URL urlImPiques2 = JeuApplication.class.getResource("img/obstacles/spikes1.png");
-                    Image imPiques2 = new Image(String.valueOf(urlImPiques2));
-                    ((ImageView) enfant).setImage(imPiques2);
                     break;
                 }
             }
