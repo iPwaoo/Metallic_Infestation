@@ -29,7 +29,6 @@ public abstract class ObjetPlacable {
         this.portee = porte;
     }
 
-    public abstract boolean peutSePoser();
 
     public abstract int getType();
 
@@ -43,9 +42,11 @@ public abstract class ObjetPlacable {
     }
 
     public abstract void lanceSentence(ArrayList<Point> points);
+
+    public abstract boolean peutSePoser();
+
     public boolean poserPlacable(){
         if(peutSePoser()){
-            System.out.println("Staline" + getType());
             terrain.setCase(this.getEmplacement(),getType());
             return true;
         }

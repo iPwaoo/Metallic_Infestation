@@ -33,7 +33,7 @@ public class Obstacle extends ObjetPlacable {
 
     @Override
     public int getType() {
-        return 4;
+        return 3;
     }
 
     @Override

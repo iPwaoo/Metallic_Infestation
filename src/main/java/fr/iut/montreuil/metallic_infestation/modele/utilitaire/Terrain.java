@@ -8,8 +8,8 @@ public class Terrain {
      * Pour le terrain :  0 = Case vide (Interdite)
      *                    1 = Chemin vide
      *                    2 = Emplacement de Tour vide
-     *                    3 = Tourelle
-     *                    4 = Obstacle
+     *                    3 = Obstacle
+     *                    4 = Tourelle
      *                    11 = Bunker Nord Ouest
      *                    12 = Bunker Nord Est
      *                    13 = Bunker Sud Est
@@ -66,7 +66,7 @@ public class Terrain {
     }
 
     public boolean tourSurCase(Case c){
-        return (terrain[c.getI()][c.getJ()] == 3);
+        return (terrain[c.getI()][c.getJ()] == 4);
     }
 
     public boolean videSurCase(Case c){
@@ -76,7 +76,7 @@ public class Terrain {
         return terrain[c.getI()][c.getJ()] == 2;
     }
     public boolean obstacleSurCase(Case c) {
-        return terrain[c.getI()][c.getJ()] == 4;
+        return terrain[c.getI()][c.getJ()] == 3;
     }
 
     public boolean objetPlacableSurCase (Case c){

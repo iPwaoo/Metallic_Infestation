@@ -38,7 +38,7 @@ public abstract class Tourelle extends ObjetPlacable {
         return this.getEmplacement();
     }
     public int getType(){
-        return 3;
+        return 4;
     }
     public boolean peutSePoser(){
         if(getTerrain().emplacementVideSurCase(getEmplacement())){

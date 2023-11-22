@@ -29,19 +29,15 @@ public class Boutique {
             joueur.debiterArgentProperty(montant);
         }
     }
-    /**
-     * typeTour == 1 -> TourelleSemi
-     * typeTour == 2 -> TourelleAuto
-     * typeTour == 3 -> TourelleMissiles
-     */
 
     public void achatPlacable(PlacableFactory factory, Case c) {
         ObjetPlacable placable = factory.creerPlacable(c, environnement, terrain);
         if (joueur.achatPossible(placable.getCout())) {
-            if(placable.poserPlacable()){
+            if(placable.poserPlacable()) {
                 environnement.ajouterDansLaListeDesPlacables(placable);
                 joueur.debiterArgentProperty(placable.getCout());
             }
+
         }
     }
 

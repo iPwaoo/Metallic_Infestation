@@ -55,7 +55,7 @@ public class ObjetPlacableVue {
                 imageView3.setTranslateY(objetPlacable.getEmplacement().getI() * 32);
                 zoneAffichageObjet.getChildren().add(imageView3);
             }
-        } else if (objetPlacable instanceof Obstacle && objetPlacable.poserPlacable()) {
+        } else if (objetPlacable instanceof Obstacle) {
             if (objetPlacable instanceof Pics){
                 URL urlImPiques = JeuApplication.class.getResource("img/obstacles/spikes1.png");
                 Image imPiques = new Image(String.valueOf(urlImPiques));
