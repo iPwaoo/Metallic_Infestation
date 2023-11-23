@@ -4,7 +4,7 @@ package fr.iut.montreuil.metallic_infestation.modele.utilitaire;
 import fr.iut.montreuil.metallic_infestation.modele.Projectiles.Projectile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
 import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.ObjetPlacable;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.*;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -19,19 +19,19 @@ public class Environnement {
     private Terrain terrain;
     private ObservableList<Ennemi> listeEnnemis;
     private ObservableList<Projectile> listeProjectiles;
-    private ObservableList<Explosion> listExplosions;
+//    private ObservableList<Explosion> listExplosions;
 
     private ObservableList<ObjetPlacable> listePlacables;
     private ArrayList<Ennemi> ennemisASpawn;
     private ParcoursBFS parcoursBFS;
     public int nbTours;
-    private ObservableList<Laser> listeLasers;
+//    private ObservableList<Laser> listeLasers;
     private Environnement(Terrain terrain) {
         this.terrain = terrain;
         this.listeEnnemis = FXCollections.observableArrayList();
         this.listeProjectiles = FXCollections.observableArrayList();
-        this.listeLasers = FXCollections.observableArrayList();
-        this.listExplosions = FXCollections.observableArrayList();
+//        this.listeLasers = FXCollections.observableArrayList();
+//        this.listExplosions = FXCollections.observableArrayList();
         this.listePlacables = FXCollections.observableArrayList();
         this.ennemisASpawn =  new ArrayList<>();
         this.parcoursBFS = ParcoursBFS.getInstance();
@@ -54,9 +54,9 @@ public class Environnement {
         return listeEnnemis;
     }
 
-    public ObservableList<Laser> getListeLasers(){
-        return listeLasers;
-    }
+//    public ObservableList<Laser> getListeLasers(){
+//        return listeLasers;
+//    }
 
     public Ennemi ennemiSurCase(Case c) {
         for (Ennemi e : listeEnnemis) {
@@ -88,7 +88,7 @@ public class Environnement {
 
     public ObservableList<ObjetPlacable> getListePlacables(){return listePlacables;}
 
-    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
+//    public ObservableList<Explosion> getListExplosions(){return listExplosions;}
 
 
     public Ennemi retirerEnnemi(Ennemi e){
@@ -120,14 +120,14 @@ public class Environnement {
         }
 
         //Cette partie de la methode est à supprimer à l'avenir. C'est l'ancienne methode du fonctionnement du laser
-        if(nbTours % 2 == 0) {
-            listeLasers.clear();
-        }
-        for (Laser l : listeLasers){
-            if (l.getEnnemiVise() == null){
-                listeLasers.clear();
-            }
-        }
+//        if(nbTours % 2 == 0) {
+//            listeLasers.clear();
+//        }
+//        for (Laser l : listeLasers){
+//            if (l.getEnnemiVise() == null){
+//                listeLasers.clear();
+//            }
+//        }
         nbTours++;
     }
 
@@ -157,21 +157,21 @@ public class Environnement {
         return this.joueur;
     }
 
-    public void ajouterLaser(Laser p){
-        if (p != null) {
-            if (p.getEnnemiVise() != null && p.getTourelle() != null) {
-                listeLasers.add(p);
-            }
-        }
-    }
+//    public void ajouterLaser(Laser p){
+//        if (p != null) {
+//            if (p.getEnnemiVise() != null && p.getTourelle() != null) {
+//                listeLasers.add(p);
+//            }
+//        }
+//    }
 
-    public void retirerExplosion(Explosion e){
-        for (int i = listExplosions.size()-1 ; i >= 0 ; i--){
-            if (listExplosions.get(i).equals(e)){
-                this.listExplosions.remove(listExplosions.get(i));
-            }
-        }
-    }
+//    public void retirerExplosion(Explosion e){
+//        for (int i = listExplosions.size()-1 ; i >= 0 ; i--){
+//            if (listExplosions.get(i).equals(e)){
+//                this.listExplosions.remove(listExplosions.get(i));
+//            }
+//        }
+//    }
 
     public IntegerProperty vagueActuelleProperty(){
         return this.vagueActuelleProperty;
