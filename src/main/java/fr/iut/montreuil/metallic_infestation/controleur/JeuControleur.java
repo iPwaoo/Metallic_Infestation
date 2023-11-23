@@ -1,12 +1,12 @@
 package fr.iut.montreuil.metallic_infestation.controleur;
 
 import fr.iut.montreuil.metallic_infestation.JeuApplication;
+import fr.iut.montreuil.metallic_infestation.modele.Projectiles.Projectile;
 import fr.iut.montreuil.metallic_infestation.modele.ennemis.Ennemi;
-import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.ObjetPlacable;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Laser;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Projectile;
-import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.ProjectileSemi;
-import fr.iut.montreuil.metallic_infestation.modele.ObjetPlacable.Tourelles.Tourelle;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.ObjetPlacable;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Obstacle;
+import fr.iut.montreuil.metallic_infestation.modele.obstacles.Pics;
+import fr.iut.montreuil.metallic_infestation.modele.tourEtProjectiles.Tourelle;
 import fr.iut.montreuil.metallic_infestation.modele.utilitaire.*;
 import fr.iut.montreuil.metallic_infestation.vue.*;
 import javafx.animation.KeyFrame;
@@ -167,7 +167,7 @@ public class JeuControleur implements Initializable {
             while (change.next()) {
                 if (change.wasRemoved()) {
                     for (int i = change.getRemoved().size() - 1; i >= 0; i--) {
-                        if (change.getRemoved() instanceof ProjectileSemi){
+                        if (change.getRemoved().get(i).getIdType()==1){
                             projectileSemiVue.retirerProjectile(change.getRemoved().get(i));
                         }
                         else {
@@ -268,13 +268,21 @@ public class JeuControleur implements Initializable {
             Case c = new Case((int) event.getY() / terrain.getTailleCase(), (int) event.getX() / terrain.getTailleCase());
 
             if (event.getButton() == MouseButton.PRIMARY){
-                boutiqueVue.achatPlacable(c);
+                if (this.terrain.emplacementVideSurCase(c)) {
+                    boutiqueVue.achatTour(c);
+                } else if (this.terrain.cheminSurCase(c)){
+                    boutiqueVue.achatObstacle(c);
+                }
             }
         });
         zoneAffichageEnnemis.setOnMouseClicked(event -> {
             Case c = new Case((int) event.getY() / terrain.getTailleCase(), (int) event.getX() / terrain.getTailleCase());
             if (event.getButton() == MouseButton.SECONDARY) {
-                boutique.venteObjetPlacable(c);
+                if (this.terrain.tourSurCase(c)) {
+                    boutique.venteTour(c);
+                } else if (this.terrain.obstacleSurCase(c)){
+                    boutique.venteObstacle(c);
+                }
             }
         });
     }
