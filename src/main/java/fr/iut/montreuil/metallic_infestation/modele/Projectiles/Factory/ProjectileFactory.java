@@ -7,7 +7,7 @@ import fr.iut.montreuil.metallic_infestation.modele.utilitaire.Point;
 import java.util.ArrayList;
 
 public abstract class ProjectileFactory {
-    public ArrayList<Projectile> tirer(Point position, ArrayList<Point> cibles, int rangTourelle) {
+    public ArrayList<Projectile> tirer(Point position, ArrayList<Point> cibles) {
         ArrayList<Projectile> projectiles=new ArrayList<>();
         for (Point p:cibles){
             projectiles.add(creerProjectile(position,p));
